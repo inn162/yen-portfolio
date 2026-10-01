@@ -11,15 +11,12 @@ import {
 
 const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-// SVG viewBox constants — all geometry is defined here
-const VB_W = 215;
-const VB_H = 135;
-// Ellipse center / radii
-const EX = 82;
-const EY = 52;
-const ERX = 76;
-const ERY = 40;
-
+/*
+  Cloud path: 7 organic lobes, slightly asymmetric, in a 158×90 viewBox.
+  Visual center of the main cloud body ≈ (78, 39).
+  Trailing puffs extend lower-right (toward portrait head) beyond the viewBox.
+  strokeDasharray "1 5.5" + round linecap → evenly-spaced round dots.
+*/
 function ThoughtBubble({
   onClick,
   reduced,
@@ -30,66 +27,63 @@ function ThoughtBubble({
   return (
     <motion.div
       className="cursor-pointer select-none"
-      style={{ position: "relative", width: "clamp(130px, 14vw, 192px)" }}
+      style={{ position: "relative", width: "clamp(120px, 12.5vw, 172px)" }}
       whileHover={reduced ? undefined : { rotate: 1, y: -2 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
       onClick={onClick}
     >
       <svg
-        viewBox={`0 0 ${VB_W} ${VB_H}`}
+        viewBox="0 0 158 90"
         width="100%"
         height="auto"
         fill="none"
         style={{ overflow: "visible", display: "block" }}
         aria-hidden="true"
       >
-        {/* Main oval — stroke-dasharray "1 5.5" + round linecap = dot row */}
-        <ellipse
-          cx={EX} cy={EY} rx={ERX} ry={ERY}
+        {/* Hand-drawn cloud — 7 soft lobes, slightly irregular */}
+        <path
+          d="
+            M 28,70
+            Q 10,70 10,54
+            Q 6,38 22,34
+            Q 16,18 34,18
+            Q 32,6 50,10
+            Q 54,-2 72,8
+            Q 76,0 94,10
+            Q 110,4 118,20
+            Q 134,18 132,36
+            Q 148,42 142,58
+            Q 140,72 122,70
+            Q 116,80 100,68
+            Q 90,78 74,68
+            Q 60,78 46,68
+            Q 32,76 28,70
+            Z
+          "
           fill="white"
-          stroke="#1a1a1a"
-          strokeWidth="2"
-          strokeDasharray="1 5.5"
+          stroke="#e8578a"
+          strokeWidth="1.6"
+          strokeDasharray="1 5"
           strokeLinecap="round"
+          strokeLinejoin="round"
         />
 
-        {/* Trailing thought circles — cascade lower-right toward portrait */}
-        <circle
-          cx="170" cy="96" r="10"
-          fill="white"
-          stroke="#1a1a1a"
-          strokeWidth="1.8"
-          strokeDasharray="1 4.5"
-          strokeLinecap="round"
-        />
-        <circle
-          cx="188" cy="110" r="6.5"
-          fill="white"
-          stroke="#1a1a1a"
-          strokeWidth="1.5"
-          strokeDasharray="1 4"
-          strokeLinecap="round"
-        />
-        <circle
-          cx="201" cy="121" r="3.5"
-          fill="white"
-          stroke="#1a1a1a"
-          strokeWidth="1.5"
-          strokeDasharray="0.8 3"
-          strokeLinecap="round"
-        />
+        {/* Trailing puffs — cascade lower-right toward portrait head */}
+        <circle cx="144" cy="84"  r="9"   fill="white" stroke="#e8578a" strokeWidth="1.4" strokeDasharray="1 4.5"  strokeLinecap="round" />
+        <circle cx="157" cy="96"  r="6"   fill="white" stroke="#e8578a" strokeWidth="1.3" strokeDasharray="1 4"    strokeLinecap="round" />
+        <circle cx="167" cy="106" r="3.5" fill="white" stroke="#e8578a" strokeWidth="1.2" strokeDasharray="0.8 3.5" strokeLinecap="round" />
       </svg>
 
-      {/* Text centered in the ellipse — overlay keeps web font rendering */}
+      {/* Text overlay — centered in the cloud body (≈49%, 43% of viewBox) */}
       <p
         className="italic leading-none pointer-events-none"
         style={{
           position: "absolute",
-          top: `${(EY / VB_H) * 100}%`,
-          left: `${(EX / VB_W) * 100}%`,
+          top: "43%",
+          left: "49%",
           transform: "translate(-50%, -50%)",
           fontFamily: "var(--font-accent)",
-          fontSize: "clamp(0.75rem, 1.15vw, 1.05rem)",
+          fontSize: "clamp(0.72rem, 1.1vw, 1rem)",
           color: "#e8578a",
           whiteSpace: "nowrap",
         }}
@@ -198,7 +192,7 @@ export default function HeroName() {
       {/* Thought bubble — left of portrait head, trails toward portrait */}
       <motion.div
         className="absolute z-[6]"
-        style={{ top: "16%", left: "44vw" }}
+        style={{ top: "25%", left: "54vw" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.1, duration: 0.8 }}
