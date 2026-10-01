@@ -135,20 +135,26 @@ export default function HeroName() {
         <p className="text-[12px] text-[#aaa]">
           Commerce × Applied Statistics · University of Virginia
         </p>
-        <div className="flex flex-col items-center gap-1.5">
+        <motion.div
+          className="flex flex-col items-end gap-0.5 cursor-pointer"
+          whileHover="hovered"
+          onClick={() => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" })}
+        >
           <p
-            className="text-[10px] text-[#aaa] tracking-[0.22em] uppercase"
-            style={{ fontFamily: "var(--font-mono)" }}
+            className="italic leading-none"
+            style={{ fontFamily: "var(--font-accent)", fontSize: "clamp(0.9rem, 1.4vw, 1.3rem)", color: "#e8578a" }}
           >
-            explore
+            come along?
           </p>
-          <motion.div
-            className="w-px bg-[#ccc] origin-top"
-            style={{ height: 32 }}
-            animate={{ scaleY: [0.2, 1, 0.2] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </div>
+          <motion.p
+            className="text-right leading-none"
+            style={{ fontFamily: "var(--font-accent)", fontSize: "clamp(0.85rem, 1.2vw, 1.1rem)", color: "#e8578a" }}
+            variants={{ hovered: { y: 4 } }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            ↓
+          </motion.p>
+        </motion.div>
       </motion.div>
     </section>
   );
