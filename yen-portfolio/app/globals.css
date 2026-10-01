@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+:root {
+  --ivory:        #F7F4F0;
+  --ivory-card:   #FDFCFA;
+  --near-black:   #1A1517;
+  --charcoal:     #3E3840;
+  --warm-gray:    #7A757B;
+  --light-gray:   #AFA9B1;
+  --border:       #DDD8DA;
+  --border-light: #EDEBE9;
+
+  --plum:         #6A4D67;
+  --plum-dark:    #4E3A4C;
+  --plum-hover:   #F2EBF1;
+  --rose:         #BE8099;
+  --rose-light:   #E9D4DC;
+  --lavender:     #EAE2E8;
+  --lavender-mid: #C9BEC9;
+}
+
+@theme inline {
+  --color-background: var(--ivory);
+  --color-foreground: var(--near-black);
+  --font-serif: var(--font-playfair);
+  --font-sans:  var(--font-inter);
+  --font-mono:  var(--font-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--near-black);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--rose-light);
+  color: var(--plum-dark);
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--ivory); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--lavender-mid); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
