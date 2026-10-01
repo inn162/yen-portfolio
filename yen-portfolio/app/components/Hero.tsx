@@ -108,7 +108,7 @@ export default function Hero() {
       {/* NUMBERS. — z:5, right-anchored, tighter vertical */}
       <motion.div
         className="absolute z-[5]"
-        style={{ top: "52%", right: "3vw" }}
+        style={{ top: "52%", left: "5vw" }}
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease, delay: 0.15 }}
