@@ -53,8 +53,8 @@ export default function HeroName() {
         className="absolute z-[2] pointer-events-none"
         style={{
           bottom: 0,
-          right: "-2vw",
-          width: "clamp(240px, 36vw, 500px)",
+          right: "-4vw",
+          width: "clamp(260px, 42vw, 580px)",
           height: "95%",
           x: ptX,
           y: ptY,
@@ -67,7 +67,7 @@ export default function HeroName() {
           src="/portrait.png"
           alt="Yen Tran"
           fill
-          sizes="(max-width: 768px) 65vw, 36vw"
+          sizes="(max-width: 768px) 70vw, 42vw"
           className="object-contain object-bottom"
           priority
         />
@@ -92,7 +92,7 @@ export default function HeroName() {
       {/* FINANCE × ANALYTICS — descriptor, sits between YEN and TRAN */}
       <motion.div
         className="absolute z-[5]"
-        style={{ top: "39%", left: "14vw" }}
+        style={{ top: "36%", left: "10vw" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7, delay: 0.6 }}
@@ -112,7 +112,7 @@ export default function HeroName() {
       {/* TRAN. — second typographic anchor, staggered right */}
       <motion.div
         className="absolute z-[5]"
-        style={{ top: "52%", left: "14vw" }}
+        style={{ top: "47%", left: "14vw" }}
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease, delay: 0.35 }}
@@ -132,7 +132,7 @@ export default function HeroName() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.9, duration: 0.7 }}
       >
-        <p className="text-[12px] text-[#aaa]">
+        <p className="text-[12px] text-[#777]">
           Commerce × Applied Statistics · University of Virginia
         </p>
         <motion.div
