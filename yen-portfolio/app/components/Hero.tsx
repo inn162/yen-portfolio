@@ -52,10 +52,10 @@ export default function Hero() {
       <motion.div
         className="absolute z-[2] pointer-events-none"
         style={{
-          top: 0,
+          bottom: 0,
           right: "-2vw",
           width: "clamp(240px, 36vw, 500px)",
-          height: "100%",
+          height: "95%",
           x: ptX,
           y: ptY,
         }}
@@ -68,7 +68,7 @@ export default function Hero() {
           alt="Yen Tran"
           fill
           sizes="(max-width: 768px) 65vw, 36vw"
-          className="object-contain object-top"
+          className="object-contain object-bottom"
           priority
         />
       </motion.div>
