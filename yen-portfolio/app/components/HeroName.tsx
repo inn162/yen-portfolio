@@ -11,6 +11,95 @@ import {
 
 const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
+// SVG viewBox constants — all geometry is defined here
+const VB_W = 215;
+const VB_H = 135;
+// Ellipse center / radii
+const EX = 82;
+const EY = 52;
+const ERX = 76;
+const ERY = 40;
+
+function ThoughtBubble({
+  onClick,
+  reduced,
+}: {
+  onClick: () => void;
+  reduced: boolean;
+}) {
+  return (
+    <motion.div
+      className="cursor-pointer select-none"
+      style={{ position: "relative", width: "clamp(130px, 14vw, 192px)" }}
+      whileHover={reduced ? undefined : { rotate: 1, y: -2 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      onClick={onClick}
+    >
+      <svg
+        viewBox={`0 0 ${VB_W} ${VB_H}`}
+        width="100%"
+        height="auto"
+        fill="none"
+        style={{ overflow: "visible", display: "block" }}
+        aria-hidden="true"
+      >
+        {/* Main oval — stroke-dasharray "1 5.5" + round linecap = dot row */}
+        <ellipse
+          cx={EX} cy={EY} rx={ERX} ry={ERY}
+          fill="white"
+          stroke="#1a1a1a"
+          strokeWidth="2"
+          strokeDasharray="1 5.5"
+          strokeLinecap="round"
+        />
+
+        {/* Trailing thought circles — cascade lower-right toward portrait */}
+        <circle
+          cx="170" cy="96" r="10"
+          fill="white"
+          stroke="#1a1a1a"
+          strokeWidth="1.8"
+          strokeDasharray="1 4.5"
+          strokeLinecap="round"
+        />
+        <circle
+          cx="188" cy="110" r="6.5"
+          fill="white"
+          stroke="#1a1a1a"
+          strokeWidth="1.5"
+          strokeDasharray="1 4"
+          strokeLinecap="round"
+        />
+        <circle
+          cx="201" cy="121" r="3.5"
+          fill="white"
+          stroke="#1a1a1a"
+          strokeWidth="1.5"
+          strokeDasharray="0.8 3"
+          strokeLinecap="round"
+        />
+      </svg>
+
+      {/* Text centered in the ellipse — overlay keeps web font rendering */}
+      <p
+        className="italic leading-none pointer-events-none"
+        style={{
+          position: "absolute",
+          top: `${(EY / VB_H) * 100}%`,
+          left: `${(EX / VB_W) * 100}%`,
+          transform: "translate(-50%, -50%)",
+          fontFamily: "var(--font-accent)",
+          fontSize: "clamp(0.75rem, 1.15vw, 1.05rem)",
+          color: "#e8578a",
+          whiteSpace: "nowrap",
+        }}
+      >
+        come along?
+      </p>
+    </motion.div>
+  );
+}
+
 export default function HeroName() {
   const prefersReduced = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
@@ -106,22 +195,18 @@ export default function HeroName() {
         </p>
       </motion.div>
 
-      {/* come along? — left of portrait head, portrait looks inward */}
+      {/* Thought bubble — left of portrait head, trails toward portrait */}
       <motion.div
-        className="absolute z-[6] cursor-pointer"
-        style={{ top: "17%", left: "52vw" }}
+        className="absolute z-[6]"
+        style={{ top: "16%", left: "44vw" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.1, duration: 0.8 }}
-        whileHover={{ opacity: 0.55 }}
-        onClick={() => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" })}
       >
-        <p
-          className="italic leading-none"
-          style={{ fontFamily: "var(--font-accent)", fontSize: "clamp(0.85rem, 1.3vw, 1.2rem)", color: "#e8578a" }}
-        >
-          come along?
-        </p>
+        <ThoughtBubble
+          onClick={() => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" })}
+          reduced={!!prefersReduced}
+        />
       </motion.div>
 
       {/* Academic descriptor — quiet lower-left */}
