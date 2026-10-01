@@ -102,7 +102,7 @@ export default function Work() {
           <FadeIn key={i} delay={i * 0.08}>
             <motion.div
               layout
-              className={`border rounded-sm overflow-hidden transition-colors duration-300 cursor-pointer ${
+              className={`border rounded-2xl overflow-hidden transition-colors duration-300 cursor-pointer ${
                 expanded === i
                   ? "border-[#6A4D67] bg-[#FDFCFA]"
                   : "border-[#EDEBE9] bg-[#FDFCFA] hover:border-[#C9BEC9]"
@@ -126,7 +126,7 @@ export default function Work() {
                 </div>
 
                 {/* Image placeholder */}
-                <div className="w-full h-32 bg-[#EAE2E8] rounded-sm mb-5 flex items-center justify-center border border-dashed border-[#C9BEC9]">
+                <div className="w-full h-32 bg-[#EAE2E8] rounded-xl mb-5 flex items-center justify-center border border-dashed border-[#C9BEC9]">
                   <p className="font-mono text-[9px] text-[#AFA9B1] tracking-widest text-center px-4">
                     [ Add project visual ]
                   </p>
@@ -141,7 +141,7 @@ export default function Work() {
 
                 <div className="flex flex-wrap gap-1.5">
                   {p.tags.map((t) => (
-                    <span key={t} className="text-[10px] px-2 py-0.5 bg-[#EAE2E8] text-[#6A4D67] rounded-sm">
+                    <span key={t} className="text-[10px] px-2 py-0.5 bg-[#EAE2E8] text-[#6A4D67] rounded-full">
                       {t}
                     </span>
                   ))}
@@ -155,7 +155,7 @@ export default function Work() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                     className="overflow-hidden"
                   >
                     <div className="px-6 pb-6 border-t border-[#EDEBE9] pt-5 space-y-4">
@@ -179,7 +179,7 @@ export default function Work() {
                       </div>
                       <div className="flex flex-wrap gap-1.5 pt-1">
                         {p.tools.map((t) => (
-                          <span key={t} className="text-[10px] px-2 py-0.5 border border-[#DDD8DA] text-[#7A757B] rounded-sm">
+                          <span key={t} className="text-[10px] px-2 py-0.5 border border-[#DDD8DA] text-[#7A757B] rounded-full">
                             {t}
                           </span>
                         ))}

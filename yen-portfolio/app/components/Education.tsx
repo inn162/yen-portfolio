@@ -1,82 +1,43 @@
-import FadeIn from "./FadeIn";
-
-const degrees = [
-  {
-    institution: "University of Virginia",
-    school: "McIntire School of Commerce",
-    degree: "Bachelor of Science in Commerce",
-    concentrations: ["Finance", "AI & Analytics"],
-    period: "2023 — 2027",
-    note: "Expected May 2027",
-  },
-  {
-    institution: "University of Virginia",
-    school: "College of Arts & Sciences",
-    degree: "Bachelor of Arts in Applied Statistics",
-    concentrations: ["Data Science"],
-    period: "2023 — 2027",
-    note: "Expected May 2027",
-  },
-];
-
 export default function Education() {
   return (
-    <section id="education" className="py-28 px-6 max-w-6xl mx-auto">
-      <FadeIn direction="left">
-        <p className="font-mono text-[10px] tracking-[0.25em] text-[#BE8099] uppercase mb-3">
-          05 — Education
-        </p>
+    <section id="education" className="bg-white border-t border-[#e8e8e8] px-[5.5vw] py-20">
+      <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#aaa", letterSpacing: "0.22em", marginBottom: "2rem" }}>
+        EDUCATION
+      </p>
+
+      <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-0 mb-8">
         <h2
-          className="text-4xl font-serif font-medium text-[#1A1517] mb-16 leading-tight"
-          style={{ fontFamily: "var(--font-playfair)" }}
+          className="font-bold text-[#111] md:mr-16"
+          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.6rem, 3vw, 2.8rem)" }}
         >
           University of Virginia
         </h2>
-      </FadeIn>
+        <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#aaa", letterSpacing: "0.15em" }}>
+          CLASS OF 2027
+        </p>
+      </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        {degrees.map((d, i) => (
-          <FadeIn key={i} delay={i * 0.12}>
-            <div className="bg-[#FDFCFA] border border-[#EDEBE9] rounded-sm p-8 hover:border-[#C9BEC9] transition-colors">
-              <p className="font-mono text-[10px] tracking-widest text-[#AFA9B1] uppercase mb-5">
-                {d.period}
-              </p>
-              <h3
-                className="text-xl font-serif font-medium text-[#1A1517] mb-1 leading-snug"
-                style={{ fontFamily: "var(--font-playfair)" }}
-              >
-                {d.degree}
-              </h3>
-              <p className="text-[#6A4D67] text-sm mb-4">{d.school}</p>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {d.concentrations.map((c) => (
-                  <span
-                    key={c}
-                    className="text-xs px-2.5 py-1 bg-[#EAE2E8] text-[#6A4D67] rounded-sm border border-[#DDD8DA]"
-                  >
-                    {c}
-                  </span>
-                ))}
-              </div>
+      <div className="grid md:grid-cols-2 gap-10 max-w-2xl">
+        <div className="border-l-2 border-[#e8578a] pl-5">
+          <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#aaa", letterSpacing: "0.15em", marginBottom: 8 }}>
+            MCINTIRE SCHOOL OF COMMERCE
+          </p>
+          <p className="font-bold text-[#111] mb-2" style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem" }}>
+            Commerce
+          </p>
+          <p className="text-[13px] text-[#666] font-light">Finance concentration</p>
+          <p className="text-[13px] text-[#666] font-light">AI &amp; Analytics track</p>
+        </div>
 
-              {/* Placeholders */}
-              <div className="border-t border-[#EDEBE9] pt-5 space-y-3">
-                <div>
-                  <p className="font-mono text-[9px] tracking-widest text-[#AFA9B1] uppercase mb-1.5">
-                    Relevant Coursework
-                  </p>
-                  <p className="text-xs text-[#C9BEC9] italic">Add coursework here</p>
-                </div>
-                <div>
-                  <p className="font-mono text-[9px] tracking-widest text-[#AFA9B1] uppercase mb-1.5">
-                    Activities &amp; Awards
-                  </p>
-                  <p className="text-xs text-[#C9BEC9] italic">Add activities here</p>
-                </div>
-              </div>
-            </div>
-          </FadeIn>
-        ))}
+        <div className="border-l-2 border-[#c4b5e8] pl-5">
+          <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#aaa", letterSpacing: "0.15em", marginBottom: 8 }}>
+            COLLEGE OF ARTS &amp; SCIENCES
+          </p>
+          <p className="font-bold text-[#111] mb-2" style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem" }}>
+            Applied Statistics
+          </p>
+          <p className="text-[13px] text-[#666] font-light">Data Science concentration</p>
+        </div>
       </div>
     </section>
   );

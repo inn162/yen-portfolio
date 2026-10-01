@@ -1,58 +1,54 @@
 @import "tailwindcss";
 
 :root {
-  --ivory:        #F7F4F0;
-  --ivory-card:   #FDFCFA;
-  --near-black:   #1A1517;
-  --charcoal:     #3E3840;
-  --warm-gray:    #7A757B;
-  --light-gray:   #AFA9B1;
-  --border:       #DDD8DA;
-  --border-light: #EDEBE9;
-
-  --plum:         #6A4D67;
-  --plum-dark:    #4E3A4C;
-  --plum-hover:   #F2EBF1;
-  --rose:         #BE8099;
-  --rose-light:   #E9D4DC;
-  --lavender:     #EAE2E8;
-  --lavender-mid: #C9BEC9;
+  --white:       #ffffff;
+  --black:       #111111;
+  --dark:        #0f0f0f;
+  --mid:         #666666;
+  --light:       #aaaaaa;
+  --rule:        #e8e8e8;
+  --pink:        #e8578a;
+  --pink-soft:   #f9c4d8;
+  --lavender:    #c4b5e8;
+  --lav-light:   #f5f2fc;
 }
 
-@theme inline {
-  --color-background: var(--ivory);
-  --color-foreground: var(--near-black);
-  --font-serif: var(--font-playfair);
-  --font-sans:  var(--font-inter);
-  --font-mono:  var(--font-mono);
+/* Font family utilities */
+.font-display { font-family: var(--font-display), system-ui, sans-serif; }
+.font-accent  { font-family: var(--font-accent), Georgia, serif; }
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  background: #ffffff;
 }
 
 body {
-  background: var(--ivory);
-  color: var(--near-black);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  background: #ffffff;
+  color: #111111;
+  font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: var(--rose-light);
-  color: var(--plum-dark);
+  background: #f9c4d8;
+  color: #111111;
 }
 
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--ivory); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: var(--lavender-mid); }
+::-webkit-scrollbar        { width: 3px; }
+::-webkit-scrollbar-track  { background: #ffffff; }
+::-webkit-scrollbar-thumb  { background: #e8e8e8; }
 
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
   html { scroll-behavior: auto; }
 }

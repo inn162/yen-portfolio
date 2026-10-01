@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter, Geist_Mono } from "next/font/google";
+import { Syne, Inter, DM_Serif_Display, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const display = Syne({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const sans = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const accent = DM_Serif_Display({
+  variable: "--font-accent",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -22,22 +30,22 @@ const mono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Yen Tran — Finance, Investing & Analytics",
-  description:
-    "Yen Tran is a finance and data science student at the University of Virginia, specializing in investing, private equity, and AI-driven analytics.",
-  keywords: ["Yen Tran", "UVA", "Finance", "Private Equity", "Data Science", "McIntire"],
+  title: "Yen Tran",
+  description: "Portfolio — Commerce × Applied Statistics, UVA 2027",
   openGraph: {
-    title: "Yen Tran — Finance, Investing & Analytics",
-    description:
-      "Finance student at UVA McIntire. Experience in private equity, investment analysis, and AI-driven analytics.",
+    title: "Yen Tran",
+    description: "Finance, investing, analytics, and AI. University of Virginia, Class of 2027.",
     type: "website",
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable} ${mono.variable} h-full antialiased`}>
-      <body className="min-h-full">{children}</body>
+    <html
+      lang="en"
+      className={`${display.variable} ${sans.variable} ${accent.variable} ${mono.variable}`}
+    >
+      <body>{children}</body>
     </html>
   );
 }

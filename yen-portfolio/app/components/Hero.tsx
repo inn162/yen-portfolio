@@ -1,108 +1,150 @@
 "use client";
-import { motion } from "framer-motion";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { useRef } from "react";
+import Image from "next/image";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 
-const stagger = {
-  container: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
-  item: {
-    hidden:  { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
-  },
-};
+const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export default function Hero() {
+  const prefersReduced = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const rawX = useMotionValue(0.5);
+  const rawY = useMotionValue(0.5);
+  const spring = { damping: 50, stiffness: 150 };
+  const ptX = useSpring(useTransform(rawX, [0, 1], [-8, 8]), spring);
+  const ptY = useSpring(useTransform(rawY, [0, 1], [-5, 5]), spring);
+
+  const onMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (prefersReduced) return;
+    const r = sectionRef.current?.getBoundingClientRect();
+    if (!r) return;
+    rawX.set((e.clientX - r.left) / r.width);
+    rawY.set((e.clientY - r.top) / r.height);
+  };
+
   return (
-    <section id="about" className="min-h-screen flex flex-col justify-center px-6 max-w-6xl mx-auto pt-24 pb-16">
-      {/* Faint dotted grid — purely decorative */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: "radial-gradient(circle, #C9BEC9 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-          opacity: 0.18,
-          maskImage: "radial-gradient(ellipse 70% 70% at 85% 50%, black 0%, transparent 100%)",
-        }}
-      />
-
-      <motion.div
-        variants={stagger.container}
-        initial="hidden"
-        animate="visible"
-        className="relative max-w-3xl"
-      >
-        <motion.p
-          variants={stagger.item}
-          className="font-mono text-[10px] tracking-[0.3em] text-[#BE8099] uppercase mb-8"
-        >
-          University of Virginia · Class of 2027
-        </motion.p>
-
-        <motion.h1
-          variants={stagger.item}
-          className="text-[clamp(3.5rem,9vw,6.5rem)] leading-[0.95] font-serif font-medium text-[#1A1517] mb-8 tracking-tight"
-          style={{ fontFamily: "var(--font-playfair)" }}
-        >
-          Yen Tran
-        </motion.h1>
-
-        <motion.p
-          variants={stagger.item}
-          className="text-[clamp(1rem,2.2vw,1.25rem)] text-[#7A757B] font-light leading-relaxed max-w-xl mb-3"
-        >
-          Finance, investing, and analytics —
-          <br />
-          <span className="text-[#3E3840]">with a curiosity for how data can make better decisions.</span>
-        </motion.p>
-
-        <motion.div
-          variants={stagger.item}
-          className="font-mono text-[10px] tracking-[0.2em] text-[#AFA9B1] uppercase mt-6 mb-12 flex flex-wrap gap-x-5 gap-y-1"
-        >
-          <span>McIntire School of Commerce</span>
-          <span className="text-[#DDD8DA]">·</span>
-          <span>Finance · AI &amp; Analytics</span>
-          <span className="text-[#DDD8DA]">·</span>
-          <span>Applied Statistics</span>
-        </motion.div>
-
-        <motion.div variants={stagger.item} className="flex flex-wrap gap-4">
-          <button
-            onClick={() => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#1A1517] hover:bg-[#6A4D67] text-white text-sm tracking-wide rounded-sm transition-all duration-300"
-          >
-            View My Work <ArrowRight size={14} />
-          </button>
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            className="inline-flex items-center gap-2 px-6 py-3 border border-[#DDD8DA] hover:border-[#6A4D67] text-[#7A757B] hover:text-[#6A4D67] text-sm tracking-wide rounded-sm transition-all duration-300"
-          >
-            Resume <ExternalLink size={13} />
-          </a>
-          <a
-            href="https://linkedin.com/in/yen-tran"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 border border-[#DDD8DA] hover:border-[#6A4D67] text-[#7A757B] hover:text-[#6A4D67] text-sm tracking-wide rounded-sm transition-all duration-300"
-          >
-            LinkedIn <ExternalLink size={13} />
-          </a>
-        </motion.div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
+    <section
+      ref={sectionRef}
+      id="hero"
+      className="relative h-screen bg-white overflow-hidden select-none"
+      onMouseMove={onMouseMove}
+      onMouseLeave={() => { rawX.set(0.5); rawY.set(0.5); }}
+    >
+      {/* Name label */}
+      <motion.p
+        className="absolute z-10"
+        style={{ top: 72, left: "5.5vw", fontFamily: "var(--font-mono)", fontSize: "11px", color: "#aaa", letterSpacing: "0.2em" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 0.8 }}
-        className="absolute bottom-10 left-6 flex items-center gap-3 text-[#AFA9B1]"
+        transition={{ delay: 0.4, duration: 0.6 }}
       >
-        <motion.div
-          className="w-px h-10 bg-[#AFA9B1] origin-top"
-          animate={{ scaleY: [0, 1, 1, 0] }}
-          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+        YEN TRAN / UVA 2027
+      </motion.p>
+
+      {/* Portrait — z:2, right column, full height */}
+      <motion.div
+        className="absolute z-[2] pointer-events-none"
+        style={{
+          top: 0,
+          right: 0,
+          width: "clamp(220px, 30vw, 440px)",
+          height: "100%",
+          x: ptX,
+          y: ptY,
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.1, delay: 0.3, ease }}
+      >
+        <Image
+          src="/portrait.png"
+          alt="Yen Tran"
+          fill
+          sizes="(max-width: 768px) 60vw, 30vw"
+          className="object-contain object-top"
+          priority
         />
-        <span className="font-mono text-[9px] tracking-[0.25em] uppercase">Scroll</span>
+      </motion.div>
+
+      {/* SOME STORIES — z:1, left-aligned, right edge dips behind portrait */}
+      <motion.div
+        className="absolute z-[1]"
+        style={{ top: "22%", left: "5.5vw" }}
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease, delay: 0.05 }}
+      >
+        <h1
+          className="font-bold leading-none tracking-tight text-[#111]"
+          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem, 9.5vw, 11rem)" }}
+        >
+          SOME STORIES
+        </h1>
+      </motion.div>
+
+      {/* start with — italic accent, z:1 */}
+      <motion.div
+        className="absolute z-[1]"
+        style={{ top: "43%", left: "5.5vw" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.25 }}
+      >
+        <p
+          className="italic leading-none"
+          style={{ fontFamily: "var(--font-accent)", fontSize: "clamp(1.8rem, 4.5vw, 5.5rem)", color: "#e8578a" }}
+        >
+          start with
+        </p>
+      </motion.div>
+
+      {/* NUMBERS. — z:3, right-aligned, sits in front of portrait */}
+      <motion.div
+        className="absolute z-[3]"
+        style={{ top: "57%", right: "5.5vw" }}
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease, delay: 0.15 }}
+      >
+        <h2
+          className="font-bold leading-none tracking-tight text-[#111]"
+          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem, 9.5vw, 11rem)" }}
+        >
+          NUMBERS.
+        </h2>
+      </motion.div>
+
+      {/* Bottom bar */}
+      <motion.div
+        className="absolute bottom-8 left-[5.5vw] right-[5.5vw] z-10 flex items-end justify-between"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.9, duration: 0.7 }}
+      >
+        <p className="text-[12px] text-[#aaa]">
+          Commerce × Applied Statistics · University of Virginia
+        </p>
+        <div className="flex flex-col items-center gap-1.5">
+          <p
+            className="text-[10px] text-[#aaa] tracking-[0.22em] uppercase"
+            style={{ fontFamily: "var(--font-mono)" }}
+          >
+            explore
+          </p>
+          <motion.div
+            className="w-px bg-[#ccc] origin-top"
+            style={{ height: 32 }}
+            animate={{ scaleY: [0.2, 1, 0.2] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
       </motion.div>
     </section>
   );

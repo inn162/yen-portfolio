@@ -1,186 +1,228 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import FadeIn from "./FadeIn";
+import { experiences } from "../lib/data";
 
-const experiences = [
-  {
-    company: "20in20 Partners",
-    role: "Investment & AI Automation Intern",
-    period: "Summer 2026",
-    location: "Vietnam",
-    description:
-      "Investment analysis and reporting for a fund focused on emerging business opportunities in Vietnam. Built automated workflows combining AI tools with investment analysis and visualization.",
-    bullets: [
-      "Conducted investment analysis and company research across multiple sectors in Vietnam",
-      "Prepared investment memoranda and preliminary investment briefs",
-      "Built financial and operating analyses for portfolio companies",
-      "Developed automated data analysis and reporting workflows using AI",
-      "Built reporting tools integrating operating and transaction-level data",
-      "Helped reduce repetitive reporting and analysis time significantly",
-    ],
-    tags: ["Investment Analysis", "AI Automation", "Financial Modeling", "Vietnam"],
-  },
-  {
-    company: "Asia Business Builder",
-    role: "Private Equity Intern",
-    period: "2025",
-    location: "Vietnam",
-    description:
-      "Private equity investment analysis focused on mid-market businesses across Vietnam, including full investment memorandum preparation and financial modeling.",
-    bullets: [
-      "Prepared a ~40-page investment and company information memorandum",
-      "Built five-year financial models with scenario analysis",
-      "Conducted commercial due diligence across target markets",
-      "Performed market and distributor research to validate business assumptions",
-    ],
-    tags: ["Private Equity", "Due Diligence", "Financial Modeling", "Investment Memo"],
-  },
-  {
-    company: "Portico Impact Fund",
-    role: "Investment Analyst — Healthcare",
-    period: "2024–2025",
-    location: "UVA",
-    description:
-      "Student-run investment fund covering the healthcare sector. Responsible for investment research, company analysis, and sector coverage.",
-    bullets: [
-      "Led healthcare sector coverage including equity research and company analysis",
-      "Presented investment recommendations to fund committee",
-      "Monitored portfolio positions and tracked sector developments",
-    ],
-    tags: ["Equity Research", "Healthcare", "Investment Analysis"],
-  },
-  {
-    company: "MB Securities",
-    role: "Analyst Intern",
-    period: "Summer 2024",
-    location: "Vietnam",
-    description:
-      "Equity research and financial analysis at one of Vietnam's leading securities firms.",
-    bullets: [
-      "Supported equity research across publicly listed Vietnamese companies",
-      "Conducted financial analysis and valuation work",
-      "Assisted with client-facing research reports",
-    ],
-    tags: ["Equity Research", "Valuation", "Financial Analysis"],
-  },
-  {
-    company: "KPIM Retail",
-    role: "Data Analytics Intern",
-    period: "2024",
-    location: "Vietnam",
-    description:
-      "Data analytics and business intelligence for a retail business, focusing on dashboard development and performance reporting.",
-    bullets: [
-      "Built Power BI dashboards to track key retail performance metrics",
-      "Designed visual reports for management decision-making",
-      "Analyzed sales and operational data to identify trends and insights",
-    ],
-    tags: ["Power BI", "Data Analytics", "Business Intelligence", "Dashboards"],
-  },
-];
+const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+function CompanyVisual({ id }: { id: string }) {
+  if (id === "kpim-retail") {
+    const bars = [0.55, 0.7, 0.45, 0.85, 0.65, 0.9, 0.75];
+    return (
+      <svg viewBox="0 0 240 140" width="100%" height="140">
+        {bars.map((h, i) => (
+          <motion.rect
+            key={i}
+            x={i * 32 + 8}
+            y={140 - h * 120}
+            width={20}
+            height={h * 120}
+            fill={i % 2 === 0 ? "#e8578a" : "#c4b5e8"}
+            fillOpacity={0.65}
+            initial={{ scaleY: 0 }}
+            animate={{ scaleY: 1 }}
+            style={{ transformOrigin: "bottom" }}
+            transition={{ duration: 0.5, delay: i * 0.07, ease }}
+          />
+        ))}
+        <line x1="0" y1="139" x2="240" y2="139" stroke="#e8e8e8" strokeWidth="1" />
+      </svg>
+    );
+  }
+
+  if (id === "mb-securities") {
+    const pts = [100, 88, 94, 76, 82, 70, 78, 62, 68, 54, 60, 48, 55, 44, 50];
+    const svgPts = pts.map((y, i) => `${(i / (pts.length - 1)) * 220 + 10},${y}`).join(" ");
+    return (
+      <svg viewBox="0 0 240 120" width="100%" height="120">
+        {[30, 60, 90].map(y => (
+          <line key={y} x1="0" y1={y} x2="240" y2={y} stroke="#f5f5f5" strokeWidth="1" />
+        ))}
+        <polyline points={svgPts} fill="none" stroke="#e8578a" strokeWidth="2" strokeLinejoin="round" />
+        <motion.circle cx={230} cy={50} r={4} fill="#e8578a" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.5 }} />
+      </svg>
+    );
+  }
+
+  if (id === "asia-business-builder") {
+    const widths = [180, 140, 200, 110, 160, 90, 130, 170, 100];
+    return (
+      <svg viewBox="0 0 240 160" width="100%" height="140">
+        {widths.map((w, i) => (
+          <motion.rect
+            key={i}
+            x={8}
+            y={i * 15 + 8}
+            width={w}
+            height={8}
+            rx={2}
+            fill={i === 0 ? "#111" : i === 1 ? "#888" : "#e8e8e8"}
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            style={{ transformOrigin: "left" }}
+            transition={{ delay: i * 0.05, duration: 0.35, ease }}
+          />
+        ))}
+      </svg>
+    );
+  }
+
+  // twenty-in-twenty: AI / network
+  const nodes = [
+    { x: 40, y: 70 }, { x: 100, y: 30 }, { x: 100, y: 110 },
+    { x: 160, y: 50 }, { x: 160, y: 90 }, { x: 210, y: 70 },
+  ];
+  const edges = [[0,1],[0,2],[1,3],[2,4],[3,5],[4,5],[1,4],[2,3]];
+  return (
+    <svg viewBox="0 0 240 140" width="100%" height="140">
+      {edges.map(([a, b], i) => (
+        <motion.line
+          key={i}
+          x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y}
+          stroke="#c4b5e8" strokeWidth="1.5" strokeOpacity={0.5}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          transition={{ delay: i * 0.07 }}
+        />
+      ))}
+      {nodes.map((n, i) => (
+        <motion.circle
+          key={i} cx={n.x} cy={n.y} r={i === 0 ? 9 : 5}
+          fill={i === 0 ? "#e8578a" : "#c4b5e8"} fillOpacity={0.8}
+          initial={{ scale: 0 }} animate={{ scale: 1 }}
+          transition={{ delay: 0.35 + i * 0.06 }}
+        />
+      ))}
+    </svg>
+  );
+}
 
 export default function Experience() {
-  const [open, setOpen] = useState<number | null>(0);
+  const [active, setActive] = useState(experiences[0].id);
+  const current = experiences.find(e => e.id === active)!;
+
+  // Group by year, newest first
+  const years: Record<string, typeof experiences> = {};
+  experiences.forEach(e => {
+    const y = e.period.match(/\d{4}/)?.[0] ?? e.period;
+    if (!years[y]) years[y] = [];
+    years[y].push(e);
+  });
+  const yearEntries = Object.entries(years).sort(([a], [b]) => Number(b) - Number(a));
 
   return (
-    <section id="experience" className="py-28 px-6 max-w-6xl mx-auto">
-      <FadeIn direction="left">
-        <p className="font-mono text-[10px] tracking-[0.25em] text-[#BE8099] uppercase mb-3">
-          02 — Experience
+    <section id="experience" className="bg-white border-t border-[#e8e8e8]">
+      <div className="px-[5.5vw] pt-28 pb-6">
+        <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#aaa", letterSpacing: "0.22em" }}>
+          EXPERIENCE
         </p>
-        <h2
-          className="text-4xl font-serif font-medium text-[#1A1517] mb-16 leading-tight"
-          style={{ fontFamily: "var(--font-playfair)" }}
-        >
-          Where I&apos;ve Worked
-        </h2>
-      </FadeIn>
+      </div>
 
-      <div className="space-y-0 border-t border-[#EDEBE9]">
-        {experiences.map((exp, i) => (
-          <FadeIn key={i} delay={i * 0.07}>
-            <div className="border-b border-[#EDEBE9]">
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                className="w-full text-left py-6 group"
-                aria-expanded={open === i}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-baseline gap-5 min-w-0">
-                    <span className="font-mono text-[10px] text-[#AFA9B1] tracking-widest shrink-0">
-                      0{i + 1}
-                    </span>
-                    <div className="min-w-0">
-                      <span className="text-[#1A1517] font-medium text-base group-hover:text-[#6A4D67] transition-colors">
-                        {exp.company}
-                      </span>
-                      <span className="text-[#7A757B] text-sm ml-3">
-                        {exp.role}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-5 shrink-0">
-                    <span className="font-mono text-xs text-[#AFA9B1] hidden sm:block">
-                      {exp.period}
-                    </span>
-                    <span
-                      className={`text-[#AFA9B1] transition-transform duration-300 ${
-                        open === i ? "rotate-45" : ""
-                      }`}
+      {/* Desktop two-panel */}
+      <div className="hidden md:grid grid-cols-[280px_1fr] min-h-[500px]">
+        {/* Left: company list */}
+        <div className="px-[5.5vw] pb-16 border-r border-[#e8e8e8] flex flex-col">
+          {yearEntries.map(([year, exps]) => (
+            <div key={year} className="mb-8">
+              <p className="mb-4" style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#e8578a", letterSpacing: "0.15em" }}>
+                {year}
+              </p>
+              {exps.map(exp => (
+                <button
+                  key={exp.id}
+                  onClick={() => setActive(exp.id)}
+                  className="w-full text-left mb-5 flex items-stretch gap-3"
+                >
+                  <span
+                    className="shrink-0 w-[2px] transition-colors duration-200"
+                    style={{ background: active === exp.id ? "#e8578a" : "#e8e8e8" }}
+                  />
+                  <div>
+                    <p
+                      className="font-bold leading-tight transition-colors duration-200"
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "1rem",
+                        color: active === exp.id ? "#111" : "#999",
+                      }}
                     >
-                      +
-                    </span>
+                      {exp.company}
+                    </p>
+                    <p className="text-[11px] text-[#bbb] mt-0.5">{exp.role}</p>
                   </div>
-                </div>
-              </button>
-
-              <AnimatePresence initial={false}>
-                {open === i && (
-                  <motion.div
-                    key="content"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                    className="overflow-hidden"
-                  >
-                    <div className="pb-8 pl-9 grid md:grid-cols-[2fr_1fr] gap-8">
-                      <div>
-                        <p className="text-[#7A757B] text-sm leading-relaxed mb-5">
-                          {exp.description}
-                        </p>
-                        <ul className="space-y-2">
-                          {exp.bullets.map((b, j) => (
-                            <li key={j} className="flex gap-3 text-[#3E3840] text-sm leading-relaxed">
-                              <span className="text-[#BE8099] shrink-0 mt-[5px] text-[8px]">◆</span>
-                              {b}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="space-y-3">
-                        <p className="font-mono text-[10px] tracking-widest text-[#AFA9B1] uppercase">
-                          {exp.location} · {exp.period}
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {exp.tags.map((t) => (
-                            <span
-                              key={t}
-                              className="text-[11px] px-2.5 py-1 bg-[#EAE2E8] text-[#6A4D67] rounded-sm border border-[#DDD8DA]"
-                            >
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                </button>
+              ))}
             </div>
-          </FadeIn>
+          ))}
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-auto text-[11px] text-[#e8578a] hover:opacity-70 transition-opacity"
+            style={{ fontFamily: "var(--font-mono)", letterSpacing: "0.12em" }}
+          >
+            VIEW FULL CV ↗
+          </a>
+        </div>
+
+        {/* Right: visual panel */}
+        <div className="overflow-hidden pl-12 pr-[5.5vw] py-12">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -14 }}
+              transition={{ duration: 0.35, ease }}
+              className="h-full flex flex-col"
+            >
+              <p
+                className="font-bold leading-none select-none mb-4"
+                style={{ fontFamily: "var(--font-display)", fontSize: "clamp(5rem, 9vw, 9rem)", color: "#f0f0f0" }}
+              >
+                {current.period.replace("Summer ", "")}
+              </p>
+              <p
+                className="font-bold text-[#111] mb-1"
+                style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.3rem, 2.2vw, 2rem)" }}
+              >
+                {current.company}
+              </p>
+              <p className="text-[11px] text-[#e8578a] mb-5 tracking-wider" style={{ fontFamily: "var(--font-mono)" }}>
+                {current.role.toUpperCase()} · {current.location.toUpperCase()}
+              </p>
+              <p className="text-[14px] text-[#666] font-light leading-relaxed mb-6 max-w-md">
+                {current.description}
+              </p>
+              <div className="mt-auto" style={{ maxWidth: 260 }}>
+                <CompanyVisual id={current.id} />
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* Mobile: vertical list */}
+      <div className="md:hidden px-[5.5vw] pb-16">
+        {yearEntries.map(([year, exps]) => (
+          <div key={year} className="mb-10">
+            <p className="mb-5" style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#e8578a", letterSpacing: "0.15em" }}>
+              {year}
+            </p>
+            {exps.map(exp => (
+              <div key={exp.id} className="mb-8 border-l-2 border-[#e8e8e8] pl-4">
+                <p className="font-bold text-[#111] mb-1" style={{ fontFamily: "var(--font-display)", fontSize: "1.05rem" }}>
+                  {exp.company}
+                </p>
+                <p className="text-[11px] text-[#aaa] mb-2">{exp.role}</p>
+                <p className="text-[13px] text-[#666] font-light leading-relaxed">{exp.description}</p>
+              </div>
+            ))}
+          </div>
         ))}
+        <a href="/resume.pdf" target="_blank" rel="noreferrer"
+          className="text-[11px] text-[#e8578a]" style={{ fontFamily: "var(--font-mono)", letterSpacing: "0.12em" }}>
+          VIEW FULL CV ↗
+        </a>
       </div>
     </section>
   );

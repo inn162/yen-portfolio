@@ -68,7 +68,7 @@ export default function Toolkit() {
                   {cat.items.map((item) => (
                     <span
                       key={item}
-                      className="text-xs px-3 py-1.5 bg-[#FDFCFA] text-[#3E3840] rounded-sm border border-[#EDEBE9] hover:border-[#6A4D67] hover:text-[#6A4D67] transition-colors cursor-default"
+                      className="text-xs px-3 py-1.5 bg-[#FDFCFA] text-[#3E3840] rounded-full border border-[#EDEBE9] hover:border-[#6A4D67] hover:text-[#6A4D67] transition-colors cursor-default"
                     >
                       {item}
                     </span>

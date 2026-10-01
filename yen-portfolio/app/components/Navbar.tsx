@@ -66,7 +66,7 @@ export default function Navbar() {
         <a
           href="/resume.pdf"
           target="_blank"
-          className="text-xs border border-[#6A4D67] text-[#6A4D67] px-4 py-2 rounded-sm hover:bg-[#6A4D67] hover:text-white transition-all tracking-wide"
+          className="text-xs border border-[#6A4D67] text-[#6A4D67] px-4 py-2 rounded-full hover:bg-[#6A4D67] hover:text-white transition-all tracking-wide"
         >
           Resume
         </a>
