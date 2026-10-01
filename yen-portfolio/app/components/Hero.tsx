@@ -48,13 +48,13 @@ export default function Hero() {
         YEN TRAN / UVA 2027
       </motion.p>
 
-      {/* Portrait — z:2, right column, full height */}
+      {/* Portrait — z:2, behind all text */}
       <motion.div
         className="absolute z-[2] pointer-events-none"
         style={{
           top: 0,
-          right: 0,
-          width: "clamp(220px, 30vw, 440px)",
+          right: "-2vw",
+          width: "clamp(240px, 36vw, 500px)",
           height: "100%",
           x: ptX,
           y: ptY,
@@ -67,16 +67,16 @@ export default function Hero() {
           src="/portrait.png"
           alt="Yen Tran"
           fill
-          sizes="(max-width: 768px) 60vw, 30vw"
+          sizes="(max-width: 768px) 65vw, 36vw"
           className="object-contain object-top"
           priority
         />
       </motion.div>
 
-      {/* SOME STORIES — z:1, left-aligned, right edge dips behind portrait */}
+      {/* SOME STORIES — z:5, always above portrait */}
       <motion.div
-        className="absolute z-[1]"
-        style={{ top: "22%", left: "5.5vw" }}
+        className="absolute z-[5]"
+        style={{ top: "19%", left: "5vw" }}
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease, delay: 0.05 }}
@@ -89,10 +89,10 @@ export default function Hero() {
         </h1>
       </motion.div>
 
-      {/* start with — italic accent, z:1 */}
+      {/* start with — italic accent, z:5, bridging toward center */}
       <motion.div
-        className="absolute z-[1]"
-        style={{ top: "43%", left: "5.5vw" }}
+        className="absolute z-[5]"
+        style={{ top: "37%", left: "16vw" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.25 }}
@@ -105,10 +105,10 @@ export default function Hero() {
         </p>
       </motion.div>
 
-      {/* NUMBERS. — z:3, right-aligned, sits in front of portrait */}
+      {/* NUMBERS. — z:5, right-anchored, tighter vertical */}
       <motion.div
-        className="absolute z-[3]"
-        style={{ top: "57%", right: "5.5vw" }}
+        className="absolute z-[5]"
+        style={{ top: "52%", right: "3vw" }}
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease, delay: 0.15 }}
