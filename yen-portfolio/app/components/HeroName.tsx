@@ -40,24 +40,20 @@ function ThoughtBubble({
         style={{ overflow: "visible", display: "block" }}
         aria-hidden="true"
       >
-        {/* Hand-drawn cloud — 7 soft lobes, slightly irregular */}
+        {/* Hand-drawn cloud — 6 large irregular lobes, loose editorial feel */}
         <path
           d="
-            M 28,70
-            Q 10,70 10,54
-            Q 6,38 22,34
-            Q 16,18 34,18
-            Q 32,6 50,10
-            Q 54,-2 72,8
-            Q 76,0 94,10
-            Q 110,4 118,20
-            Q 134,18 132,36
-            Q 148,42 142,58
-            Q 140,72 122,70
-            Q 116,80 100,68
-            Q 90,78 74,68
-            Q 60,78 46,68
-            Q 32,76 28,70
+            M 24,68
+            C 8,68 4,54 14,44
+            C 6,36 16,20 30,22
+            C 26,8 46,2 58,14
+            C 56,2 78,-4 90,12
+            C 92,0 114,4 118,20
+            C 130,14 144,30 136,46
+            C 148,52 142,68 128,68
+            C 116,78 100,72 96,64
+            C 80,74 60,74 56,64
+            C 44,72 28,72 24,68
             Z
           "
           fill="white"
@@ -68,10 +64,10 @@ function ThoughtBubble({
           strokeLinejoin="round"
         />
 
-        {/* Trailing puffs — cascade lower-right toward portrait head */}
-        <circle cx="144" cy="84"  r="9"   fill="white" stroke="#e8578a" strokeWidth="1.4" strokeDasharray="1 4.5"  strokeLinecap="round" />
-        <circle cx="157" cy="96"  r="6"   fill="white" stroke="#e8578a" strokeWidth="1.3" strokeDasharray="1 4"    strokeLinecap="round" />
-        <circle cx="167" cy="106" r="3.5" fill="white" stroke="#e8578a" strokeWidth="1.2" strokeDasharray="0.8 3.5" strokeLinecap="round" />
+        {/* Trailing puffs — tighter spacing toward portrait head */}
+        <circle cx="146" cy="84"  r="9"   fill="white" stroke="#e8578a" strokeWidth="1.4" strokeDasharray="1 4.5"  strokeLinecap="round" />
+        <circle cx="160" cy="96"  r="6"   fill="white" stroke="#e8578a" strokeWidth="1.3" strokeDasharray="1 4"    strokeLinecap="round" />
+        <circle cx="171" cy="106" r="3.5" fill="white" stroke="#e8578a" strokeWidth="1.2" strokeDasharray="0.8 3.5" strokeLinecap="round" />
       </svg>
 
       {/* Text overlay — centered in the cloud body (≈49%, 43% of viewBox) */}
@@ -79,8 +75,8 @@ function ThoughtBubble({
         className="italic leading-none pointer-events-none"
         style={{
           position: "absolute",
-          top: "43%",
-          left: "49%",
+          top: "40%",
+          left: "48%",
           transform: "translate(-50%, -50%)",
           fontFamily: "var(--font-accent)",
           fontSize: "clamp(0.72rem, 1.1vw, 1rem)",
@@ -192,7 +188,7 @@ export default function HeroName() {
       {/* Thought bubble — left of portrait head, trails toward portrait */}
       <motion.div
         className="absolute z-[6]"
-        style={{ top: "25%", left: "54vw" }}
+        style={{ top: "28%", left: "59vw" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.1, duration: 0.8 }}
