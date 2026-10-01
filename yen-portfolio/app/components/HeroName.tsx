@@ -37,7 +37,7 @@ export default function HeroName() {
       onMouseMove={onMouseMove}
       onMouseLeave={() => { rawX.set(0.5); rawY.set(0.5); }}
     >
-      {/* Metadata — name is the hero now, so just UVA / 2027 */}
+      {/* UVA / 2027 — quiet upper-left */}
       <motion.p
         className="absolute z-10"
         style={{ top: 72, left: "5.5vw", fontFamily: "var(--font-mono)", fontSize: "11px", color: "#aaa", letterSpacing: "0.2em" }}
@@ -48,12 +48,12 @@ export default function HeroName() {
         UVA / 2027
       </motion.p>
 
-      {/* Portrait — z:2, central, behind all text, bottom-anchored */}
+      {/* Portrait — large, right-edge anchored, behind all text */}
       <motion.div
         className="absolute z-[2] pointer-events-none"
         style={{
           bottom: 0,
-          left: "36vw",
+          right: "-2vw",
           width: "clamp(260px, 44vw, 620px)",
           height: "95%",
           x: ptX,
@@ -73,66 +73,47 @@ export default function HeroName() {
         />
       </motion.div>
 
-      {/* YEN — flush left, first anchor */}
+      {/* Left identity block: YEN / TRAN. / FINANCE × ANALYTICS */}
       <motion.div
         className="absolute z-[5]"
-        style={{ top: "18%", left: "4vw" }}
-        initial={{ opacity: 0, y: -16 }}
+        style={{ top: "24%", left: "5vw" }}
+        initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease, delay: 0.05 }}
       >
         <h1
-          className="font-bold leading-none tracking-tight text-[#111]"
-          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem, 9.5vw, 11rem)" }}
+          className="font-bold tracking-tight text-[#111]"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(2.8rem, 9.5vw, 11rem)",
+            lineHeight: 0.93,
+          }}
         >
           YEN
+          <br />
+          TRAN.
         </h1>
-      </motion.div>
-
-      {/* FINANCE × ANALYTICS — left side, between YEN and TRAN */}
-      <motion.div
-        className="absolute z-[5]"
-        style={{ top: "38%", left: "8vw" }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.7, delay: 0.6 }}
-      >
         <p
           style={{
             fontFamily: "var(--font-mono)",
             fontSize: "clamp(0.65rem, 1.05vw, 0.95rem)",
             color: "#e8578a",
             letterSpacing: "0.2em",
+            marginTop: "clamp(0.7rem, 2vw, 1.6rem)",
           }}
         >
           FINANCE × ANALYTICS
         </p>
       </motion.div>
 
-      {/* TRAN. — flush left, mirrors YEN, portrait body between them */}
-      <motion.div
-        className="absolute z-[5]"
-        style={{ top: "58%", left: "4vw" }}
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease, delay: 0.35 }}
-      >
-        <h2
-          className="font-bold leading-none tracking-tight text-[#111]"
-          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem, 9.5vw, 11rem)" }}
-        >
-          TRAN.
-        </h2>
-      </motion.div>
-
-      {/* come along? — near portrait head, personal invitation */}
+      {/* come along? — left of portrait head, portrait looks inward */}
       <motion.div
         className="absolute z-[6] cursor-pointer"
-        style={{ top: "14%", left: "62vw" }}
+        style={{ top: "17%", left: "52vw" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.1, duration: 0.8 }}
-        whileHover={{ opacity: 0.7 }}
+        whileHover={{ opacity: 0.55 }}
         onClick={() => document.getElementById("work")?.scrollIntoView({ behavior: "smooth" })}
       >
         <p
@@ -143,7 +124,7 @@ export default function HeroName() {
         </p>
       </motion.div>
 
-      {/* Bottom bar — academic descriptor only */}
+      {/* Academic descriptor — quiet lower-left */}
       <motion.div
         className="absolute bottom-8 left-[5.5vw] z-10"
         initial={{ opacity: 0 }}
