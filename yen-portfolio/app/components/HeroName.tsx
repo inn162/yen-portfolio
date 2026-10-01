@@ -11,7 +11,7 @@ import {
 
 const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-export default function Hero() {
+export default function HeroName() {
   const prefersReduced = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -37,18 +37,18 @@ export default function Hero() {
       onMouseMove={onMouseMove}
       onMouseLeave={() => { rawX.set(0.5); rawY.set(0.5); }}
     >
-      {/* Name label */}
+      {/* Metadata — name is the hero now, so just UVA / 2027 */}
       <motion.p
         className="absolute z-10"
         style={{ top: 72, left: "5.5vw", fontFamily: "var(--font-mono)", fontSize: "11px", color: "#aaa", letterSpacing: "0.2em" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.6 }}
+        transition={{ delay: 0.5, duration: 0.6 }}
       >
-        YEN TRAN / UVA 2027
+        UVA / 2027
       </motion.p>
 
-      {/* Portrait — z:2, behind all text */}
+      {/* Portrait — z:2, behind all text, bottom-right anchored */}
       <motion.div
         className="absolute z-[2] pointer-events-none"
         style={{
@@ -61,7 +61,7 @@ export default function Hero() {
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.1, delay: 0.3, ease }}
+        transition={{ duration: 1.1, delay: 0.2, ease }}
       >
         <Image
           src="/portrait.png"
@@ -73,10 +73,10 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* SOME STORIES — z:5, always above portrait */}
+      {/* YEN — first typographic anchor */}
       <motion.div
         className="absolute z-[5]"
-        style={{ top: "19%", left: "5vw" }}
+        style={{ top: "20%", left: "5vw" }}
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease, delay: 0.05 }}
@@ -85,39 +85,43 @@ export default function Hero() {
           className="font-bold leading-none tracking-tight text-[#111]"
           style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem, 9.5vw, 11rem)" }}
         >
-          SOME STORIES
+          YEN
         </h1>
       </motion.div>
 
-      {/* start with — italic accent, z:5, bridging toward center */}
+      {/* FINANCE × ANALYTICS — descriptor, sits between YEN and TRAN */}
       <motion.div
         className="absolute z-[5]"
-        style={{ top: "37%", left: "16vw" }}
+        style={{ top: "39%", left: "14vw" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.25 }}
+        transition={{ duration: 0.7, delay: 0.6 }}
       >
         <p
-          className="italic leading-none"
-          style={{ fontFamily: "var(--font-accent)", fontSize: "clamp(1.8rem, 4.5vw, 5.5rem)", color: "#e8578a" }}
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: "clamp(0.65rem, 1.05vw, 0.95rem)",
+            color: "#e8578a",
+            letterSpacing: "0.2em",
+          }}
         >
-          start with
+          FINANCE × ANALYTICS
         </p>
       </motion.div>
 
-      {/* NUMBERS. — z:5, right-anchored, tighter vertical */}
+      {/* TRAN. — second typographic anchor, staggered right */}
       <motion.div
         className="absolute z-[5]"
-        style={{ top: "52%", left: "5vw" }}
+        style={{ top: "52%", left: "14vw" }}
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease, delay: 0.15 }}
+        transition={{ duration: 0.9, ease, delay: 0.35 }}
       >
         <h2
           className="font-bold leading-none tracking-tight text-[#111]"
           style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem, 9.5vw, 11rem)" }}
         >
-          NUMBERS.
+          TRAN.
         </h2>
       </motion.div>
 

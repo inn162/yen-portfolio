@@ -1,5 +1,5 @@
 import Nav from "./components/Nav";
-import Hero from "./components/Hero";
+import Hero from "./components/HeroName"; // swap to HeroSlogan to restore previous version
 import About from "./components/About";
 import WorkIndex from "./components/WorkIndex";
 import Experience from "./components/Experience";
