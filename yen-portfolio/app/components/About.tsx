@@ -1,20 +1,42 @@
 export default function About() {
   return (
-    <section id="about" className="px-[5.5vw] py-24 border-t border-[#e8e8e8] max-w-3xl">
-      <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#aaa", letterSpacing: "0.22em", marginBottom: "1.5rem" }}>
+    <section id="about" className="px-[5.5vw] pt-16 pb-20 border-t border-[#e8e8e8]">
+      <p
+        className="mb-8"
+        style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#ddd", letterSpacing: "0.22em" }}
+      >
         ABOUT
       </p>
-      <p className="text-[18px] text-[#111] leading-relaxed font-light mb-6">
-        I grew up in Vietnam before moving across the world to UVA, where I&apos;m now a fourth-year studying Commerce and Applied Statistics, with concentrations in Finance and AI &amp; Analytics.
-      </p>
-      <p className="text-[15px] text-[#666] leading-relaxed font-light mb-6">
-        Along the way, I&apos;ve worked across private equity, public markets, data analytics, and AI automation. The common thread? I like digging into the details, connecting the dots, and turning what I find into something that matters.
-      </p>
-      <p className="text-[15px] text-[#666] leading-relaxed font-light mb-6">
-        I keep unnecessarily detailed travel plans, rate restaurants aggressively, and go questionable distances for a good hike.
-      </p>
-      <p className="text-[15px] text-[#666] leading-relaxed font-light">
-        This website is somewhere between the two.
+
+      <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
+        <h2
+          className="font-bold text-[#111] leading-tight md:flex-1"
+          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.7rem, 4vw, 4rem)" }}
+        >
+          <span className="block">I grew up in Vietnam</span>
+          <span className="block">before moving across</span>
+          <span className="block">the world to UVA.</span>
+        </h2>
+
+        <div className="flex flex-col gap-3 md:w-44 md:shrink-0 md:pt-1">
+          <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#aaa", letterSpacing: "0.18em", lineHeight: "1.7" }}>
+            FOURTH YEAR<br />UNIVERSITY OF VIRGINIA
+          </p>
+          <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#aaa", letterSpacing: "0.18em", lineHeight: "1.7" }}>
+            COMMERCE<br />+ APPLIED STATISTICS
+          </p>
+          <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#aaa", letterSpacing: "0.18em", lineHeight: "1.7" }}>
+            FINANCE<br />+ AI &amp; ANALYTICS
+          </p>
+        </div>
+      </div>
+
+      <p
+        className="mt-10 md:mt-12 text-[15px] text-[#666] leading-relaxed font-light"
+        style={{ maxWidth: "60ch" }}
+      >
+        Along the way, I&apos;ve worked across private equity, public markets, data analytics, and AI automation.{" "}
+        I&apos;m interested in understanding what&apos;s really driving the numbers—and what to do with that information.
       </p>
     </section>
   );

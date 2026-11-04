@@ -108,11 +108,7 @@ export default function Elsewhere() {
         ))}
       </div>
 
-      <div className="px-[5.5vw] pt-8 pb-24">
-        <p className="text-[12px] text-[#bbb] font-light" style={{ fontFamily: "var(--font-mono)", letterSpacing: "0.1em" }}>
-          Drag the photos around. Add yours later.
-        </p>
-      </div>
+      <div className="px-[5.5vw] pt-8 pb-24" />
     </section>
   );
 }

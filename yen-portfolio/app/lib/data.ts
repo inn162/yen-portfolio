@@ -136,6 +136,77 @@ export const projects: Project[] = [
     output:
       "Adopted as the standard management reporting format. Reduced time spent in weekly reporting meetings.",
   },
+  {
+    slug: "road-ready-bundle",
+    number: "06",
+    title: "Road-Ready Bundle",
+    tagline: "Go-to-market strategy for CarMax's bundled car ownership product.",
+    tags: ["Strategy", "Marketing", "Financial Analysis", "Consumer Research"],
+    color: "#8C8690",
+    preview: null,
+    context:
+      "Gen Z car buyers face stress and decision fatigue at every stage of the purchase journey. CarMax's ancillary products — financing, warranty, insurance, maintenance — were sold separately, leaving customers overwhelmed and conversion rates below potential.",
+    question:
+      "How can CarMax simplify post-purchase decisions for Gen Z buyers to increase ancillary product adoption and strengthen long-term customer relationships?",
+    approach:
+      "Designed the Road-Ready Bundle: a modular offering combining CarMax Auto Finance, MaxCare warranty, GEICO insurance, and RepairPal prepaid maintenance. Built a full go-to-market plan including a 5% bundle discount, AI-powered personalization quiz, phased campaign roadmap (Drive Easy → Drive Confident → Drive Covered), and an alpha/beta testing framework.",
+    analysis:
+      "Primary research validated demand: 81% of Gen Z want insurance at point of sale, 65% would buy prepaid maintenance, 71% trust AI for their shopping experience. Competitive perceptual mapping across CarMax, Carvana, AutoNation, Honda, and Toyota identified whitespace in convenience × comprehensiveness. Financial modeling produced NPV of $537M and IRR of 2,138% on Year 1 testing cost of ~$1M.",
+    output:
+      "Full go-to-market recommendation presented to CarMax executives and McIntire faculty. Three-phase campaign strategy with $114M total budget and 248% projected ROI.",
+  },
+  {
+    slug: "ebay-entrupy",
+    number: "08",
+    title: "eBay × Entrupy",
+    tagline: "M&A recommendation to internalize AI authentication and strengthen platform trust.",
+    tags: ["Strategy", "M&A", "Financial Analysis", "Competitive Analysis"],
+    color: "#C4849D",
+    preview: null,
+    context:
+      "eBay's highest-volume categories — fashion, footwear, jewelry, electronics, and collectibles — are among the most counterfeited product classes globally. As the recommerce market grows at 7.48% CAGR toward $50B by 2030, specialized competitors (StockX, The RealReal, GOAT) are differentiating through in-house authentication. eBay's reliance on third-party authenticators limits platform control, speed, and buyer trust.",
+    question:
+      "How can eBay close the trust gap with specialized resale platforms and defend its position in high-value categories — where authenticity is a prerequisite for continued growth?",
+    approach:
+      "Recommended that eBay acquire Entrupy, an AI-powered authentication platform, to internalize verification across its highest-risk categories. Analyzed strategic fit across brand values, technology integration, and category coverage. Built a full valuation model covering acquisition cost, cost savings from eliminating third-party authentication fees at scale, revenue uplift from improved buyer trust, and synergy quantification with scenario analysis.",
+    analysis:
+      "Competitive landscape analysis across Amazon, StockX, The RealReal, GOAT, and Vestiaire Collective benchmarked authentication models and cost structures. Financial model quantified cost savings from in-house verification, incremental GMV from trust improvements, and integration costs. Scenario and sensitivity analysis tested return across GMV growth and cost savings assumptions.",
+    output:
+      "M&A recommendation delivered to simulated eBay Board of Directors. Entrupy acquisition generates NPV of $289M at IRR of 32%, shifting eBay from a listing platform to a trust-driven marketplace with proprietary AI authentication capability.",
+  },
+  {
+    slug: "michelin-strategy",
+    number: "09",
+    title: "Michelin Restaurant Strategy",
+    tagline: "Strategic recommendation for a Michelin-starred restaurant.",
+    tags: ["Strategy", "Financial Analysis"],
+    color: "#8C8690",
+    preview: null,
+    context: "[Add context]",
+    question: "[Add question]",
+    approach: "[Add approach]",
+    analysis: "[Add analysis]",
+    output: "[Add output]",
+  },
+  {
+    slug: "student-club-db",
+    number: "07",
+    title: "Student Club Database",
+    tagline: "Relational database design and analysis for student organization management.",
+    tags: ["SQL", "Database Design", "Tableau", "Analytics"],
+    color: "#6B4866",
+    preview: null,
+    context:
+      "Student organizations manage membership, events, finances, and participation across multiple channels with no unified data structure — leading to fragmented records and limited visibility into club operations.",
+    question:
+      "How do you design a relational database that accurately models student club operations and enables meaningful analysis of membership and activity patterns?",
+    approach:
+      "Designed a normalized relational schema covering members, events, roles, attendance, and finances. Translated real-world entities and relationships into an ER diagram, implemented in SQL, and connected to Tableau for analytical views.",
+    analysis:
+      "Built and queried the database to surface membership trends, event participation rates, and financial summaries. Validated referential integrity and tested edge cases across the schema.",
+    output:
+      "Fully functional student club database with SQL implementation and Tableau dashboards providing operational visibility across membership, events, and finances.",
+  },
 ];
 
 export const experiences: Experience[] = [
@@ -146,12 +217,27 @@ export const experiences: Experience[] = [
     period: "Summer 2026",
     location: "Vietnam",
     description:
-      "Investment analysis and AI-assisted workflows for a fund focused on emerging business opportunities in Vietnam. Built reporting tools, memoranda, and automated analysis pipelines that reduced manual effort in the investment process.",
+      "Investment analysis and automated reporting for a Vietnam-focused fund. Financial and operational data were fragmented across systems with no unified management view. Built workflows connecting data sources into automated reporting, produced investment memoranda, and conducted company analysis across multiple sectors.",
     highlights: [
       "Investment analysis and company research across sectors",
       "AI-assisted workflows for investment memoranda",
       "Reporting tools integrating operating and transaction-level data",
       "Worked primarily with businesses and investments in Vietnam",
+    ],
+    image: null,
+  },
+  {
+    id: "seo-vietnam",
+    company: "SEO-Vietnam",
+    role: "Fellow",
+    period: "2026",
+    location: "Vietnam",
+    description:
+      "More than a professional network, SEO-Vietnam brings together mentorship, community, and service. Through one-on-one mentorship, career development, and community initiatives, I've found a space to learn from people ahead of me, grow alongside my peers, and give back along the way.",
+    highlights: [
+      "One-on-one mentorship and career development",
+      "Community initiatives and peer learning",
+      "Mentorship, community, and service across the network",
     ],
     image: null,
   },
@@ -162,7 +248,7 @@ export const experiences: Experience[] = [
     period: "2025",
     location: "Vietnam",
     description:
-      "Private equity investment analysis for mid-market businesses in Vietnam. Full investment memorandum preparation, financial modeling, and commercial due diligence.",
+      "Private equity research on mid-market businesses in Vietnam, where limited public information made bottom-up analysis essential. Built financial models and investment frameworks from scratch — market research, competitive analysis, distributor interviews, and comprehensive memoranda used in active deal evaluation.",
     highlights: [
       "~40-page investment and company information memorandum",
       "Five-year financial models with scenario analysis",
@@ -177,7 +263,7 @@ export const experiences: Experience[] = [
     period: "Summer 2024",
     location: "Vietnam",
     description:
-      "Equity research and financial analysis at one of Vietnam's leading securities firms.",
+      "Equity research across publicly listed Vietnamese companies at one of Vietnam's leading securities firms. Financial analysis, valuation, and sector coverage across Vietnamese public markets.",
     highlights: [
       "Equity research across publicly listed Vietnamese companies",
       "Financial analysis and valuation",
@@ -191,7 +277,7 @@ export const experiences: Experience[] = [
     period: "2024",
     location: "Vietnam",
     description:
-      "Business intelligence and dashboard development for a retail business. Built visual reporting systems for management decision-making.",
+      "Retail performance data was spread across systems with no unified management view. Built Power BI dashboards designed backward from the decisions management needed to make — tracking KPIs, trends, and variance across product categories and time periods.",
     highlights: [
       "Power BI dashboards tracking retail performance metrics",
       "Visual reporting for management decision-making",
@@ -204,7 +290,7 @@ export const uvaOrgs: UVAOrg[] = [
   {
     id: "portico",
     name: "Portico Impact Fund",
-    role: "Investment Analyst · Healthcare Coverage Director",
+    role: "Healthcare Coverage Director",
     description:
       "Student-run investment fund. Led healthcare sector coverage including equity research, company analysis, and investment recommendations presented to the fund committee.",
     image: null,
@@ -212,15 +298,15 @@ export const uvaOrgs: UVAOrg[] = [
   {
     id: "jcc",
     name: "Jefferson Consulting Collective",
-    role: "[Add your role]",
-    description: "[Add description]",
+    role: "MD of Projects",
+    description: "Manage project delivery and client relationships for UVA's student-run consulting organization.",
     image: null,
   },
   {
     id: "biokind",
     name: "BioKind Analytics",
-    role: "[Add your role]",
-    description: "[Add description]",
+    role: "Analyst",
+    description: "Data analysis and research supporting BioKind's work connecting analytical resources with mission-driven organizations.",
     image: null,
   },
 ];
@@ -236,6 +322,6 @@ export const photos: Photo[] = [
 
 export const contact = {
   email: "nbp4ps@virginia.edu",
-  linkedin: "https://www.linkedin.com/in/yen-tran-2a8a89213/",
+  linkedin: "https://www.linkedin.com/in/yentran162/",
   resume: "/resume.pdf",
 };

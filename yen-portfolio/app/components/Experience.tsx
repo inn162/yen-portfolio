@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { experiences } from "../lib/data";
 
@@ -63,6 +64,34 @@ function CompanyVisual({ id }: { id: string }) {
             transition={{ delay: i * 0.05, duration: 0.35, ease }}
           />
         ))}
+      </svg>
+    );
+  }
+
+  if (id === "seo-vietnam") {
+    const rings = [
+      { cx: 72,  cy: 70, r: 48, label: "mentorship" },
+      { cx: 120, cy: 70, r: 48, label: "peers"      },
+      { cx: 96,  cy: 30, r: 48, label: "service"    },
+    ];
+    return (
+      <svg viewBox="0 0 240 140" width="100%" height="140">
+        {rings.map((ring, i) => (
+          <motion.circle
+            key={i}
+            cx={ring.cx} cy={ring.cy} r={ring.r}
+            fill="none"
+            stroke={i === 0 ? "#e8578a" : "#c4b5e8"}
+            strokeWidth="1.2"
+            strokeOpacity={0.55}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            style={{ transformOrigin: `${ring.cx}px ${ring.cy}px` }}
+            transition={{ duration: 0.5, delay: i * 0.12, ease }}
+          />
+        ))}
+        <motion.circle cx={96} cy={56} r={4} fill="#e8578a" fillOpacity={0.8}
+          initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.5 }} />
       </svg>
     );
   }
@@ -193,6 +222,15 @@ export default function Experience() {
               <p className="text-[14px] text-[#666] font-light leading-relaxed mb-6 max-w-md">
                 {current.description}
               </p>
+              {current.id === "twenty-in-twenty" && (
+                <Link
+                  href="/work/luma-live"
+                  className="inline-block mb-6 hover:opacity-70 transition-opacity"
+                  style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#e8578a", letterSpacing: "0.14em" }}
+                >
+                  CASE STUDY: LUMA LIVE →
+                </Link>
+              )}
               <div className="mt-auto" style={{ maxWidth: 260 }}>
                 <CompanyVisual id={current.id} />
               </div>
@@ -215,6 +253,15 @@ export default function Experience() {
                 </p>
                 <p className="text-[11px] text-[#aaa] mb-2">{exp.role}</p>
                 <p className="text-[13px] text-[#666] font-light leading-relaxed">{exp.description}</p>
+                {exp.id === "twenty-in-twenty" && (
+                  <Link
+                    href="/work/luma-live"
+                    className="inline-block mt-3 hover:opacity-70 transition-opacity"
+                    style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#e8578a", letterSpacing: "0.14em" }}
+                  >
+                    CASE STUDY: LUMA LIVE →
+                  </Link>
+                )}
               </div>
             ))}
           </div>

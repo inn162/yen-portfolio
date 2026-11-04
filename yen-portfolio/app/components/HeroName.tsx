@@ -11,12 +11,6 @@ import {
 
 const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-/*
-  Cloud path: 7 organic lobes, slightly asymmetric, in a 158×90 viewBox.
-  Visual center of the main cloud body ≈ (78, 39).
-  Trailing puffs extend lower-right (toward portrait head) beyond the viewBox.
-  strokeDasharray "1 5.5" + round linecap → evenly-spaced round dots.
-*/
 function ThoughtBubble({
   onClick,
   reduced,
@@ -33,27 +27,27 @@ function ThoughtBubble({
       onClick={onClick}
     >
       <svg
-        viewBox="0 0 158 90"
+        viewBox="0 0 160 90"
         width="100%"
         height="auto"
         fill="none"
         style={{ overflow: "visible", display: "block" }}
         aria-hidden="true"
       >
-        {/* Hand-drawn cloud — 6 large irregular lobes, loose editorial feel */}
         <path
           d="
-            M 24,68
-            C 8,68 4,54 14,44
-            C 6,36 16,20 30,22
-            C 26,8 46,2 58,14
-            C 56,2 78,-4 90,12
-            C 92,0 114,4 118,20
-            C 130,14 144,30 136,46
-            C 148,52 142,68 128,68
-            C 116,78 100,72 96,64
-            C 80,74 60,74 56,64
-            C 44,72 28,72 24,68
+            M 34,68
+            C 22,72 14,60 22,50
+            C 14,42 18,28 32,26
+            C 28,12 44,6 56,16
+            C 54,2 74,-2 84,10
+            C 82,0 102,2 108,16
+            C 124,10 136,22 132,36
+            C 146,42 144,58 130,64
+            C 128,76 112,78 106,66
+            C 98,76 82,78 78,66
+            C 70,76 54,76 50,66
+            C 40,76 24,74 34,68
             Z
           "
           fill="white"
@@ -64,22 +58,22 @@ function ThoughtBubble({
           strokeLinejoin="round"
         />
 
-        {/* Trailing puffs — tighter spacing toward portrait head */}
-        <circle cx="146" cy="84"  r="9"   fill="white" stroke="#e8578a" strokeWidth="1.4" strokeDasharray="1 4.5"  strokeLinecap="round" />
-        <circle cx="160" cy="96"  r="6"   fill="white" stroke="#e8578a" strokeWidth="1.3" strokeDasharray="1 4"    strokeLinecap="round" />
-        <circle cx="171" cy="106" r="3.5" fill="white" stroke="#e8578a" strokeWidth="1.2" strokeDasharray="0.8 3.5" strokeLinecap="round" />
+        {/* Trail — same diagonal, consistent gap cloud→puff1 = puff1→2 = puff2→3 (~12px each) */}
+        <circle cx="152" cy="75" r="9"   fill="white" stroke="#e8578a" strokeWidth="1.4" strokeDasharray="1 4.5"  strokeLinecap="round" />
+        <circle cx="174" cy="91" r="6"   fill="white" stroke="#e8578a" strokeWidth="1.3" strokeDasharray="1 4"    strokeLinecap="round" />
+        <circle cx="192" cy="104" r="3.5" fill="white" stroke="#e8578a" strokeWidth="1.2" strokeDasharray="0.8 3.5" strokeLinecap="round" />
       </svg>
 
-      {/* Text overlay — centered in the cloud body (≈49%, 43% of viewBox) */}
+      {/* Text lowered ~4px within cloud for optical centering */}
       <p
         className="italic leading-none pointer-events-none"
         style={{
           position: "absolute",
-          top: "40%",
-          left: "48%",
+          top: "46%",
+          left: "50%",
           transform: "translate(-50%, -50%)",
           fontFamily: "var(--font-accent)",
-          fontSize: "clamp(0.72rem, 1.1vw, 1rem)",
+          fontSize: "clamp(0.82rem, 1.25vw, 1.12rem)",
           color: "#e8578a",
           whiteSpace: "nowrap",
         }}
@@ -112,7 +106,7 @@ export default function HeroName() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative h-screen bg-white overflow-hidden select-none"
+      className="relative min-h-[90vh] bg-white overflow-hidden select-none"
       onMouseMove={onMouseMove}
       onMouseLeave={() => { rawX.set(0.5); rawY.set(0.5); }}
     >
@@ -188,7 +182,7 @@ export default function HeroName() {
       {/* Thought bubble — left of portrait head, trails toward portrait */}
       <motion.div
         className="absolute z-[6]"
-        style={{ top: "28%", left: "59vw" }}
+        style={{ top: "27%", left: "59vw" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.1, duration: 0.8 }}
