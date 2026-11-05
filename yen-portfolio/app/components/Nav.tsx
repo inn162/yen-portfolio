@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 const links = [
   { label: "Work",       href: "#work" },
   { label: "Experience", href: "#experience" },
-  { label: "Elsewhere",  href: "#elsewhere" },
+  { label: "Contact",    href: "#contact" },
 ];
 
 export default function Nav() {
@@ -27,8 +27,8 @@ export default function Nav() {
       <div className="flex items-center justify-between px-[5.5vw] h-14">
         <Link
           href="/"
-          className="font-bold text-[15px] text-[#111] tracking-tight"
-          style={{ fontFamily: "var(--font-display)" }}
+          className="text-[18px] text-[#111]"
+          style={{ fontFamily: "var(--font-accent)", fontWeight: 400 }}
         >
           Yen Tran
         </Link>

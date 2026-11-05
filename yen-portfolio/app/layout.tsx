@@ -30,11 +30,12 @@ const mono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Yen Tran",
-  description: "Portfolio — Commerce × Applied Statistics, UVA 2027",
+  title: "Yen Tran — Finance & Analytics",
+  description: "UVA '27 Commerce & Statistics. PE and equity research experience in Vietnam, plus AI tools for investment reporting and data storytelling.",
   openGraph: {
-    title: "Yen Tran",
-    description: "Finance, investing, analytics, and AI. University of Virginia, Class of 2027.",
+    title: "Yen Tran — Finance & Analytics",
+    description: "UVA '27 Commerce & Statistics. PE and equity research experience in Vietnam, plus AI tools for investment reporting and data storytelling.",
+    images: [{ url: "/portrait.png", width: 800, height: 1200, alt: "Yen Tran" }],
     type: "website",
   },
 };

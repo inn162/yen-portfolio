@@ -63,7 +63,7 @@ export default function Education() {
             { name: "Statistical Machine Learning", tools: ["R"], color: "#c4b5e8" },
           ].map((course) => (
             <div key={course.name} className="border-l border-dashed pl-5" style={{ borderColor: course.color }}>
-              <p className="text-[13px] text-[#333] font-light leading-snug mb-3">{course.name}</p>
+              <p className="text-[13px] text-[#111] font-light leading-snug mb-3">{course.name}</p>
               <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#bbb", letterSpacing: "0.1em" }}>
                 {course.tools.join(" · ")}
               </p>
@@ -103,7 +103,7 @@ export default function Education() {
             },
           ].map((course) => (
             <div key={course.name} className="border-l border-dashed pl-5 flex flex-col" style={{ borderColor: course.color }}>
-              <p className="text-[13px] text-[#333] font-light leading-snug mb-2">{course.name}</p>
+              <p className="text-[13px] text-[#111] font-light leading-snug mb-2">{course.name}</p>
               {course.tools.length > 0 && (
                 <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#bbb", letterSpacing: "0.1em" }}>
                   {course.tools.join(" · ")}
