@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid,
-  ResponsiveContainer, ReferenceLine, ReferenceArea,
+  ResponsiveContainer, ReferenceLine, ReferenceArea, Customized,
 } from 'recharts'
 
 // ── TOKENS ────────────────────────────────────────────────────────────────────
