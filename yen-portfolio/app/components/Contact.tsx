@@ -10,7 +10,7 @@ export default function Contact() {
       <div className="px-[5.5vw] pt-24 pb-20">
         <h2
           className="font-bold text-white leading-none mb-14"
-          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(3.5rem, 8vw, 8rem)" }}
+          style={{ fontFamily: "'Amulya', var(--font-display)", fontSize: "clamp(2.5rem, 5.5vw, 5rem)", fontWeight: 600 }}
         >
           Let&apos;s talk.
         </h2>
@@ -29,24 +29,26 @@ export default function Contact() {
               {contact.email}
             </span>
           </a>
-          <a
-            href={contact.linkedin}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-baseline gap-3 text-[#888] hover:text-white transition-colors"
-          >
-            <span className="text-[15px]">LinkedIn</span>
-            <span className="text-[13px]">↗</span>
-          </a>
-          <a
-            href={contact.resume}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-baseline gap-3 text-[#888] hover:text-white transition-colors"
-          >
-            <span className="text-[15px]">Resume</span>
-            <span className="text-[13px]">↗</span>
-          </a>
+          <div className="flex gap-10">
+            <a
+              href={contact.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-baseline gap-3 text-[#888] hover:text-white transition-colors"
+            >
+              <span className="text-[15px]">LinkedIn</span>
+              <span className="text-[13px]">↗</span>
+            </a>
+            <a
+              href={contact.resume}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-baseline gap-3 text-[#888] hover:text-white transition-colors"
+            >
+              <span className="text-[15px]">Resume</span>
+              <span className="text-[13px]">↗</span>
+            </a>
+          </div>
         </div>
       </div>
 

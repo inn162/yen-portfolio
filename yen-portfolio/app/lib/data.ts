@@ -13,6 +13,12 @@ export interface Project {
   output: string;
 }
 
+export interface ExperienceImage {
+  src: string;
+  width: number;
+  height: number;
+}
+
 export interface Experience {
   id: string;
   company: string;
@@ -22,6 +28,9 @@ export interface Experience {
   description: string;
   highlights: string[];
   image: string | null;
+  imageWidth: number | null;
+  imageHeight: number | null;
+  extraImages: ExperienceImage[];
 }
 
 export interface UVAOrg {
@@ -224,7 +233,10 @@ export const experiences: Experience[] = [
       "Reporting tools integrating operating and transaction-level data",
       "Worked primarily with businesses and investments in Vietnam",
     ],
-    image: null,
+    image: "/20in20.jpg",
+    imageWidth: 4713,
+    imageHeight: 3535,
+    extraImages: [],
   },
   {
     id: "seo-vietnam",
@@ -239,7 +251,10 @@ export const experiences: Experience[] = [
       "Community initiatives and peer learning",
       "Mentorship, community, and service across the network",
     ],
-    image: null,
+    image: "/seov.jpg",
+    imageWidth: 1640,
+    imageHeight: 924,
+    extraImages: [{ src: "/seov2.jpg", width: 1462, height: 1132 }],
   },
   {
     id: "asia-business-builder",
@@ -254,7 +269,10 @@ export const experiences: Experience[] = [
       "Five-year financial models with scenario analysis",
       "Commercial due diligence and distributor research",
     ],
-    image: null,
+    image: "/logo-abb.png",
+    imageWidth: 670,
+    imageHeight: 298,
+    extraImages: [],
   },
   {
     id: "mb-securities",
@@ -268,7 +286,10 @@ export const experiences: Experience[] = [
       "Equity research across publicly listed Vietnamese companies",
       "Financial analysis and valuation",
     ],
-    image: null,
+    image: "/logo-mbs.png",
+    imageWidth: 1200,
+    imageHeight: 379,
+    extraImages: [],
   },
   {
     id: "kpim-retail",
@@ -282,7 +303,10 @@ export const experiences: Experience[] = [
       "Power BI dashboards tracking retail performance metrics",
       "Visual reporting for management decision-making",
     ],
-    image: null,
+    image: "/logo-kpim.png",
+    imageWidth: 1495,
+    imageHeight: 570,
+    extraImages: [],
   },
 ];
 
@@ -293,21 +317,21 @@ export const uvaOrgs: UVAOrg[] = [
     role: "Healthcare Coverage Director",
     description:
       "Student-run investment fund. Led healthcare sector coverage including equity research, company analysis, and investment recommendations presented to the fund committee.",
-    image: null,
+    image: "/logo-portico-2.png",
   },
   {
     id: "jcc",
     name: "Jefferson Consulting Collective",
     role: "MD of Projects",
     description: "Manage project delivery and client relationships for UVA's student-run consulting organization.",
-    image: null,
+    image: "/logo-jcc.png",
   },
   {
     id: "biokind",
     name: "BioKind Analytics",
     role: "Analyst",
     description: "Data analysis and research supporting BioKind's work connecting analytical resources with mission-driven organizations.",
-    image: null,
+    image: "/logo-biokind.png",
   },
 ];
 
@@ -321,7 +345,7 @@ export const photos: Photo[] = [
 ];
 
 export const contact = {
-  email: "nbp4ps@virginia.edu",
+  email: "haiyen.tran1612@gmail.com",
   linkedin: "https://www.linkedin.com/in/yentran162/",
-  resume: "/resume.pdf",
+  resume: "https://drive.google.com/file/d/1h_6iL8S71ZqmhM1nyv-Sza-TPDiDxpE5/view?usp=sharing",
 };

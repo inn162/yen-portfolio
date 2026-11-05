@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { experiences } from "../lib/data";
@@ -14,14 +15,9 @@ function CompanyVisual({ id }: { id: string }) {
         {bars.map((h, i) => (
           <motion.rect
             key={i}
-            x={i * 32 + 8}
-            y={140 - h * 120}
-            width={20}
-            height={h * 120}
-            fill={i % 2 === 0 ? "#e8578a" : "#c4b5e8"}
-            fillOpacity={0.65}
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: 1 }}
+            x={i * 32 + 8} y={140 - h * 120} width={20} height={h * 120}
+            fill={i % 2 === 0 ? "#e8578a" : "#c4b5e8"} fillOpacity={0.65}
+            initial={{ scaleY: 0 }} animate={{ scaleY: 1 }}
             style={{ transformOrigin: "bottom" }}
             transition={{ duration: 0.5, delay: i * 0.07, ease }}
           />
@@ -40,7 +36,8 @@ function CompanyVisual({ id }: { id: string }) {
           <line key={y} x1="0" y1={y} x2="240" y2={y} stroke="#f5f5f5" strokeWidth="1" />
         ))}
         <polyline points={svgPts} fill="none" stroke="#e8578a" strokeWidth="2" strokeLinejoin="round" />
-        <motion.circle cx={230} cy={50} r={4} fill="#e8578a" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.5 }} />
+        <motion.circle cx={230} cy={50} r={4} fill="#e8578a"
+          initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.5 }} />
       </svg>
     );
   }
@@ -51,15 +48,9 @@ function CompanyVisual({ id }: { id: string }) {
       <svg viewBox="0 0 240 160" width="100%" height="140">
         {widths.map((w, i) => (
           <motion.rect
-            key={i}
-            x={8}
-            y={i * 15 + 8}
-            width={w}
-            height={8}
-            rx={2}
+            key={i} x={8} y={i * 15 + 8} width={w} height={8} rx={2}
             fill={i === 0 ? "#111" : i === 1 ? "#888" : "#e8e8e8"}
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
+            initial={{ scaleX: 0 }} animate={{ scaleX: 1 }}
             style={{ transformOrigin: "left" }}
             transition={{ delay: i * 0.05, duration: 0.35, ease }}
           />
@@ -68,35 +59,6 @@ function CompanyVisual({ id }: { id: string }) {
     );
   }
 
-  if (id === "seo-vietnam") {
-    const rings = [
-      { cx: 72,  cy: 70, r: 48, label: "mentorship" },
-      { cx: 120, cy: 70, r: 48, label: "peers"      },
-      { cx: 96,  cy: 30, r: 48, label: "service"    },
-    ];
-    return (
-      <svg viewBox="0 0 240 140" width="100%" height="140">
-        {rings.map((ring, i) => (
-          <motion.circle
-            key={i}
-            cx={ring.cx} cy={ring.cy} r={ring.r}
-            fill="none"
-            stroke={i === 0 ? "#e8578a" : "#c4b5e8"}
-            strokeWidth="1.2"
-            strokeOpacity={0.55}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            style={{ transformOrigin: `${ring.cx}px ${ring.cy}px` }}
-            transition={{ duration: 0.5, delay: i * 0.12, ease }}
-          />
-        ))}
-        <motion.circle cx={96} cy={56} r={4} fill="#e8578a" fillOpacity={0.8}
-          initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.5 }} />
-      </svg>
-    );
-  }
-
-  // twenty-in-twenty: AI / network
   const nodes = [
     { x: 40, y: 70 }, { x: 100, y: 30 }, { x: 100, y: 110 },
     { x: 160, y: 50 }, { x: 160, y: 90 }, { x: 210, y: 70 },
@@ -105,17 +67,14 @@ function CompanyVisual({ id }: { id: string }) {
   return (
     <svg viewBox="0 0 240 140" width="100%" height="140">
       {edges.map(([a, b], i) => (
-        <motion.line
-          key={i}
+        <motion.line key={i}
           x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y}
           stroke="#c4b5e8" strokeWidth="1.5" strokeOpacity={0.5}
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          transition={{ delay: i * 0.07 }}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.07 }}
         />
       ))}
       {nodes.map((n, i) => (
-        <motion.circle
-          key={i} cx={n.x} cy={n.y} r={i === 0 ? 9 : 5}
+        <motion.circle key={i} cx={n.x} cy={n.y} r={i === 0 ? 9 : 5}
           fill={i === 0 ? "#e8578a" : "#c4b5e8"} fillOpacity={0.8}
           initial={{ scale: 0 }} animate={{ scale: 1 }}
           transition={{ delay: 0.35 + i * 0.06 }}
@@ -129,148 +88,174 @@ export default function Experience() {
   const [active, setActive] = useState(experiences[0].id);
   const current = experiences.find(e => e.id === active)!;
 
-  // Group by year, newest first
-  const years: Record<string, typeof experiences> = {};
-  experiences.forEach(e => {
-    const y = e.period.match(/\d{4}/)?.[0] ?? e.period;
-    if (!years[y]) years[y] = [];
-    years[y].push(e);
-  });
-  const yearEntries = Object.entries(years).sort(([a], [b]) => Number(b) - Number(a));
-
   return (
     <section id="experience" className="bg-white border-t border-[#e8e8e8]">
-      <div className="px-[5.5vw] pt-28 pb-6">
-        <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#aaa", letterSpacing: "0.22em" }}>
+
+      {/* Label + horizontal tab selector */}
+      <div className="px-[5.5vw] pt-20">
+        <p
+          className="mb-8"
+          style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#aaa", letterSpacing: "0.22em" }}
+        >
           EXPERIENCE
         </p>
-      </div>
 
-      {/* Desktop two-panel */}
-      <div className="hidden md:grid grid-cols-[280px_1fr] min-h-[500px]">
-        {/* Left: company list */}
-        <div className="px-[5.5vw] pb-16 border-r border-[#e8e8e8] flex flex-col">
-          {yearEntries.map(([year, exps]) => (
-            <div key={year} className="mb-8">
-              <p className="mb-4" style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#e8578a", letterSpacing: "0.15em" }}>
-                {year}
-              </p>
-              {exps.map(exp => (
-                <button
-                  key={exp.id}
-                  onClick={() => setActive(exp.id)}
-                  className="w-full text-left mb-5 flex items-stretch gap-3"
-                >
-                  <span
-                    className="shrink-0 w-[2px] transition-colors duration-200"
-                    style={{ background: active === exp.id ? "#e8578a" : "#e8e8e8" }}
-                  />
-                  <div>
-                    <p
-                      className="font-bold leading-tight transition-colors duration-200"
-                      style={{
-                        fontFamily: "var(--font-display)",
-                        fontSize: "1rem",
-                        color: active === exp.id ? "#111" : "#999",
-                      }}
-                    >
-                      {exp.company}
-                    </p>
-                    <p className="text-[11px] text-[#bbb] mt-0.5">{exp.role}</p>
-                  </div>
-                </button>
-              ))}
-            </div>
-          ))}
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-auto text-[11px] text-[#e8578a] hover:opacity-70 transition-opacity"
-            style={{ fontFamily: "var(--font-mono)", letterSpacing: "0.12em" }}
-          >
-            VIEW FULL CV ↗
-          </a>
-        </div>
-
-        {/* Right: visual panel */}
-        <div className="overflow-hidden pl-12 pr-[5.5vw] py-12">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -14 }}
-              transition={{ duration: 0.35, ease }}
-              className="h-full flex flex-col"
+        {/* Tabs — overflow-x-auto for mobile scroll */}
+        <div className="flex overflow-x-auto border-b border-[#e8e8e8] no-scrollbar">
+          {experiences.map((exp) => (
+            <button
+              key={exp.id}
+              onClick={() => setActive(exp.id)}
+              className="shrink-0 flex flex-col items-start px-5 py-3 -mb-px border-b-2 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-[#e8578a]"
+              style={{ borderBottomColor: active === exp.id ? "#e8578a" : "transparent" }}
             >
-              <p
-                className="font-bold leading-none select-none mb-4"
-                style={{ fontFamily: "var(--font-display)", fontSize: "clamp(5rem, 9vw, 9rem)", color: "#f0f0f0" }}
+              <span
+                style={{
+                  fontFamily: "'Amulya', var(--font-display)",
+                  fontSize: "0.875rem",
+                  fontWeight: 600,
+                  color: active === exp.id ? "#111" : "#c0c0c0",
+                  transition: "color 0.2s",
+                  whiteSpace: "nowrap",
+                }}
               >
-                {current.period.replace("Summer ", "")}
-              </p>
-              <p
-                className="font-bold text-[#111] mb-1"
-                style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.3rem, 2.2vw, 2rem)" }}
+                {exp.company}
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: "9px",
+                  letterSpacing: "0.1em",
+                  color: active === exp.id ? "#e8578a" : "#ddd",
+                  transition: "color 0.2s",
+                  whiteSpace: "nowrap",
+                  marginTop: "2px",
+                }}
               >
-                {current.company}
-              </p>
-              <p className="text-[11px] text-[#e8578a] mb-5 tracking-wider" style={{ fontFamily: "var(--font-mono)" }}>
-                {current.role.toUpperCase()} · {current.location.toUpperCase()}
-              </p>
-              <p className="text-[14px] text-[#666] font-light leading-relaxed mb-6 max-w-md">
-                {current.description}
-              </p>
-              {current.id === "twenty-in-twenty" && (
-                <Link
-                  href="/work/luma-live"
-                  className="inline-block mb-6 hover:opacity-70 transition-opacity"
-                  style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#e8578a", letterSpacing: "0.14em" }}
-                >
-                  CASE STUDY: LUMA LIVE →
-                </Link>
-              )}
-              <div className="mt-auto" style={{ maxWidth: 260 }}>
-                <CompanyVisual id={current.id} />
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                {exp.period.replace("Summer ", "").toUpperCase()}
+              </span>
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Mobile: vertical list */}
-      <div className="md:hidden px-[5.5vw] pb-16">
-        {yearEntries.map(([year, exps]) => (
-          <div key={year} className="mb-10">
-            <p className="mb-5" style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#e8578a", letterSpacing: "0.15em" }}>
-              {year}
-            </p>
-            {exps.map(exp => (
-              <div key={exp.id} className="mb-8 border-l-2 border-[#e8e8e8] pl-4">
-                <p className="font-bold text-[#111] mb-1" style={{ fontFamily: "var(--font-display)", fontSize: "1.05rem" }}>
-                  {exp.company}
+      {/* Main content */}
+      <div className="px-[5.5vw] pt-12 pb-16">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.28, ease }}
+          >
+            {/* Two-column grid: text left, visual right */}
+            <div className="grid lg:grid-cols-[1fr_380px] gap-10 lg:gap-16 items-start">
+
+              {/* Text */}
+              <div>
+                <h3
+                  className="font-bold text-[#111] leading-tight mb-3"
+                  style={{
+                    fontFamily: "'Amulya', var(--font-display)",
+                    fontSize: "clamp(1.8rem, 3vw, 2.8rem)",
+                  }}
+                >
+                  {current.company}
+                </h3>
+
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-7">
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#e8578a", letterSpacing: "0.14em" }}>
+                    {current.role.toUpperCase()}
+                  </span>
+                  <span style={{ color: "#ddd", fontSize: "10px" }}>·</span>
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#bbb", letterSpacing: "0.1em" }}>
+                    {current.location.toUpperCase()}
+                  </span>
+                  <span style={{ color: "#ddd", fontSize: "10px" }}>·</span>
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#bbb", letterSpacing: "0.1em" }}>
+                    {current.period.toUpperCase()}
+                  </span>
+                </div>
+
+                <p
+                  className="text-[14px] text-[#555] font-light leading-relaxed mb-7"
+                  style={{ maxWidth: "52ch" }}
+                >
+                  {current.description}
                 </p>
-                <p className="text-[11px] text-[#aaa] mb-2">{exp.role}</p>
-                <p className="text-[13px] text-[#666] font-light leading-relaxed">{exp.description}</p>
-                {exp.id === "twenty-in-twenty" && (
+
+                {current.id === "twenty-in-twenty" && (
                   <Link
                     href="/work/luma-live"
-                    className="inline-block mt-3 hover:opacity-70 transition-opacity"
+                    className="inline-block hover:opacity-70 transition-opacity"
                     style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#e8578a", letterSpacing: "0.14em" }}
                   >
                     CASE STUDY: LUMA LIVE →
                   </Link>
                 )}
               </div>
-            ))}
-          </div>
-        ))}
-        <a href="/resume.pdf" target="_blank" rel="noreferrer"
-          className="text-[11px] text-[#e8578a]" style={{ fontFamily: "var(--font-mono)", letterSpacing: "0.12em" }}>
-          VIEW FULL CV ↗
-        </a>
+
+              {/* Visual */}
+              <div>
+                {current.image && current.imageWidth && current.imageHeight ? (
+                  current.extraImages.length > 0 ? (
+                    <div className="flex gap-2 items-stretch">
+                      <div className="flex-1 relative overflow-hidden rounded-sm" style={{ height: 220 }}>
+                        <Image
+                          src={current.image}
+                          alt={current.company}
+                          fill
+                          className="object-cover object-center"
+                          sizes="(min-width: 1024px) 190px, 50vw"
+                        />
+                      </div>
+                      {current.extraImages.map((img, i) => (
+                        <div key={i} className="flex-1 relative overflow-hidden rounded-sm" style={{ height: 220 }}>
+                          <Image
+                            src={img.src}
+                            alt={`${current.company} ${i + 2}`}
+                            fill
+                            className="object-cover object-center"
+                            sizes="(min-width: 1024px) 190px, 50vw"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <Image
+                      src={current.image}
+                      alt={current.company}
+                      width={current.imageWidth}
+                      height={current.imageHeight}
+                      className="w-full h-auto rounded-sm"
+                      sizes="(min-width: 1024px) 380px, 100vw"
+                    />
+                  )
+                ) : (
+                  <div className="rounded-sm p-6" style={{ background: "#fafafa", border: "1px solid #f0f0f0" }}>
+                    <CompanyVisual id={current.id} />
+                  </div>
+                )}
+              </div>
+
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="mt-12 pt-6 border-t border-[#f0f0f0]">
+          <a
+            href="https://drive.google.com/file/d/1h_6iL8S71ZqmhM1nyv-Sza-TPDiDxpE5/view?usp=sharing"
+            target="_blank"
+            rel="noreferrer"
+            className="text-[11px] text-[#e8578a] hover:opacity-70 transition-opacity"
+            style={{ fontFamily: "var(--font-mono)", letterSpacing: "0.12em" }}
+          >
+            VIEW FULL CV ↗
+          </a>
+        </div>
       </div>
+
     </section>
   );
 }

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { uvaOrgs } from "../lib/data";
 
 export default function AtUVA() {
@@ -15,14 +16,18 @@ export default function AtUVA() {
             key={org.id}
             className={`py-10 ${i < uvaOrgs.length - 1 ? "md:border-r border-b md:border-b-0 border-[#e8e8e8]" : ""} ${i > 0 ? "md:pl-10" : ""}`}
           >
-            {/* Visual placeholder */}
-            <div
-              className="mb-6 border border-dashed border-[#e8e8e8] flex items-center justify-center"
-              style={{ height: 100, background: i === 0 ? "#fff5f8" : i === 1 ? "#fafaff" : "#f8fff8" }}
-            >
-              <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#ccc", letterSpacing: "0.1em" }}>
-                [ ADD LOGO / ARTIFACT ]
-              </p>
+            {/* Logo */}
+            <div className="mb-6 flex items-center" style={{ height: 60 }}>
+              {org.image ? (
+                <Image
+                  src={org.image}
+                  alt={org.name}
+                  width={200}
+                  height={60}
+                  className="h-10 w-auto object-contain object-left"
+                  style={{ maxHeight: 48 }}
+                />
+              ) : null}
             </div>
 
             <p

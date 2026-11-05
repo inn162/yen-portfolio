@@ -1,3 +1,4 @@
+@import url('https://api.fontshare.com/v2/css?f[]=amulya@400,500,600,700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -43,6 +44,9 @@ body {
 ::-webkit-scrollbar        { width: 3px; }
 ::-webkit-scrollbar-track  { background: #ffffff; }
 ::-webkit-scrollbar-thumb  { background: #e8e8e8; }
+
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

@@ -4,16 +4,16 @@ export default function HeroName() {
   return (
     <section id="hero" className="bg-white pt-14">
       <div className="max-w-[1440px] mx-auto px-[5.5vw]">
-        <div className="flex flex-col md:grid md:grid-cols-[2fr_3fr] md:gap-10 md:items-center md:min-h-[calc(100vh-3.5rem)]">
+        <div className="flex flex-col lg:grid lg:grid-cols-[2fr_3fr] lg:gap-10 lg:items-center lg:min-h-[calc(100vh-3.5rem)]">
 
-          {/* Portrait — circle, centered in left column */}
-          <div className="flex items-center justify-center pt-10 md:pt-0">
-            <div className="relative w-52 h-52 md:w-80 md:h-80 rounded-full overflow-hidden ring-1 ring-[#e8e8e8]">
+          {/* Portrait — stacks top on mobile/tablet, left column on desktop */}
+          <div className="flex items-center justify-center pt-10 lg:pt-0">
+            <div className="relative w-44 h-44 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-80 xl:h-80 rounded-full overflow-hidden ring-2 ring-[#e8578a]">
               <Image
                 src="/portrait.png"
                 alt="Yen Tran"
                 fill
-                sizes="(max-width: 768px) 208px, 320px"
+                sizes="(max-width: 768px) 176px, (max-width: 1024px) 224px, (max-width: 1280px) 256px, 320px"
                 className="object-cover object-top"
                 priority
               />
@@ -21,7 +21,7 @@ export default function HeroName() {
           </div>
 
           {/* Text column */}
-          <div className="flex flex-col py-12 md:py-16">
+          <div className="flex flex-col py-10 lg:py-16">
 
             <p
               className="mb-5 text-[11px] text-[#aaa] tracking-[0.18em]"
@@ -30,17 +30,24 @@ export default function HeroName() {
               UVA &apos;27 · FINANCE × DATA × AI
             </p>
 
-            <h1
-              className="text-[#111] mb-6"
-              style={{
-                fontFamily: "var(--font-accent)",
-                fontSize: "clamp(2.5rem, 5.5vw, 5rem)",
-                fontWeight: 400,
-                lineHeight: 1.05,
-              }}
-            >
-              Yen Tran
-            </h1>
+            {/* Name + pink rule — wrapper shrinks to name width */}
+            <div style={{ width: "max-content", maxWidth: "100%" }} className="mb-6">
+              <h1
+                className="text-[#111]"
+                style={{
+                  fontFamily: "'Amulya', var(--font-display)",
+                  fontSize: "clamp(2.5rem, 5.5vw, 5rem)",
+                  fontWeight: 600,
+                  lineHeight: 1.05,
+                }}
+              >
+                Yen Tran
+              </h1>
+              <div
+                className="bg-[#e8578a]"
+                style={{ height: "2px", marginTop: "10px" }}
+              />
+            </div>
 
             <p
               className="text-[#111] mb-6"
@@ -51,7 +58,7 @@ export default function HeroName() {
                 lineHeight: 1.3,
               }}
             >
-              Curious about the numbers. Even more curious about what I can do with them.
+              Curious about the numbers.<br />Even more curious about what I can do with them.
             </p>
 
             <p
@@ -64,9 +71,9 @@ export default function HeroName() {
                 maxWidth: "54ch",
               }}
             >
-              I grew up in Vietnam and now study Commerce and Applied Statistics at the University
-              of Virginia. My work spans private equity, investment research, and AI-powered
-              analytics, with a focus on turning complex information into something useful.
+              My work spans private equity, investment research, and AI-powered analytics.
+              I enjoy finding patterns in messy data, connecting the dots, and turning
+              scattered information into something useful.
             </p>
 
             <p

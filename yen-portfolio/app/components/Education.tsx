@@ -10,7 +10,7 @@ export default function Education() {
       <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-0 mb-8">
         <h2
           className="font-bold text-[#111] md:mr-16"
-          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.6rem, 3vw, 2.8rem)" }}
+          style={{ fontFamily: "'Amulya', var(--font-display)", fontSize: "clamp(1.6rem, 3vw, 2.8rem)" }}
         >
           University of Virginia
         </h2>
@@ -24,7 +24,7 @@ export default function Education() {
           <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#aaa", letterSpacing: "0.15em", marginBottom: 8 }}>
             MCINTIRE SCHOOL OF COMMERCE
           </p>
-          <p className="font-bold text-[#111] mb-2" style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem" }}>
+          <p className="font-bold text-[#111] mb-2" style={{ fontFamily: "'Amulya', var(--font-display)", fontSize: "1.2rem" }}>
             Commerce
           </p>
           <p className="text-[13px] text-[#666] font-light">Finance concentration</p>
@@ -35,7 +35,7 @@ export default function Education() {
           <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#aaa", letterSpacing: "0.15em", marginBottom: 8 }}>
             COLLEGE OF ARTS &amp; SCIENCES
           </p>
-          <p className="font-bold text-[#111] mb-2" style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem" }}>
+          <p className="font-bold text-[#111] mb-2" style={{ fontFamily: "'Amulya', var(--font-display)", fontSize: "1.2rem" }}>
             Applied Statistics
           </p>
           <p className="text-[13px] text-[#666] font-light">Data Science concentration</p>

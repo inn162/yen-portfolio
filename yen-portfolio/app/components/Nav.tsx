@@ -28,7 +28,7 @@ export default function Nav() {
         <Link
           href="/"
           className="text-[18px] text-[#111]"
-          style={{ fontFamily: "var(--font-accent)", fontWeight: 400 }}
+          style={{ fontFamily: "'Amulya', var(--font-display)", fontWeight: 600 }}
         >
           Yen Tran
         </Link>

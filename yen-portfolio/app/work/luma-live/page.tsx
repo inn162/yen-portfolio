@@ -3,7 +3,6 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import LumaEmbed from "../../components/LumaEmbed";
-import { LUMA_DEMO_URL } from "../../lib/luma";
 
 const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -65,222 +64,50 @@ function LaptopFrame({ children }: { children: React.ReactNode }) {
   );
 }
 
-// ── Annotations ────────────────────────────────────────────────────────────────
-
-const ANNOTATIONS = [
-  {
-    id: "current-cash",
-    num: "01",
-    label: "CURRENT CASH",
-    question: "What can we actually spend today?",
-    // position relative to laptop wrapper: top/left as percent of laptop width/height
-    side: "left" as const,
-    anchorPct: { x: 22, y: 14 }, // where line touches the screen
-  },
-  {
-    id: "first-shortfall",
-    num: "02",
-    label: "FIRST SHORTFALL",
-    question: "When does liquidity become constrained?",
-    side: "left" as const,
-    anchorPct: { x: 38, y: 52 },
-  },
-  {
-    id: "cash-trough",
-    num: "03",
-    label: "CASH TROUGH",
-    question: "How bad does the gap get?",
-    side: "right" as const,
-    anchorPct: { x: 62, y: 60 },
-  },
-  {
-    id: "deferrable",
-    num: "04",
-    label: "DEFERRABLE",
-    question: "Which payments can move?",
-    side: "left" as const,
-    anchorPct: { x: 30, y: 78 },
-  },
-  {
-    id: "capital-need",
-    num: "05",
-    label: "CAPITAL NEED",
-    question: "What do we actually need to raise?",
-    side: "right" as const,
-    anchorPct: { x: 70, y: 85 },
-  },
-];
-
-function AnnotatedLaptop() {
-  const [active, setActive] = useState<string | null>(null);
-
+function LaptopShowcase() {
   return (
-    <div className="relative px-[5.5vw]" style={{ paddingTop: 48, paddingBottom: 48 }}>
-      {/* Annotation columns + laptop grid */}
-      <div className="grid grid-cols-[180px_1fr_180px] gap-6 items-start max-w-[1100px] mx-auto">
-
-        {/* Left annotations */}
-        <div className="flex flex-col gap-8 pt-[12%]">
-          {ANNOTATIONS.filter(a => a.side === "left").map((ann, i) => (
-            <motion.button
-              key={ann.id}
-              onClick={() => setActive(active === ann.id ? null : ann.id)}
-              className="text-left group"
-              initial={{ opacity: 0, x: -12 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 + i * 0.1, duration: 0.5, ease }}
-            >
-              <div className="flex items-start gap-2">
-                <span
-                  className="transition-colors duration-200 shrink-0 mt-0.5"
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 9,
-                    color: active === ann.id ? "#e8578a" : "#bbb",
-                    letterSpacing: "0.1em",
-                  }}
-                >
-                  {ann.num}
-                </span>
-                <div>
-                  <p
-                    className="transition-colors duration-200 leading-none mb-1"
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: 9,
-                      letterSpacing: "0.12em",
-                      color: active === ann.id ? "#111" : "#888",
-                    }}
-                  >
-                    {ann.label}
-                  </p>
-                  <p
-                    className="transition-colors duration-200"
-                    style={{
-                      fontFamily: "var(--font-sans)",
-                      fontSize: 11,
-                      color: active === ann.id ? "#444" : "#bbb",
-                      lineHeight: 1.45,
-                    }}
-                  >
-                    {ann.question}
-                  </p>
-                </div>
-              </div>
-              {/* Connector dash */}
-              <div
-                className="mt-2 transition-all duration-200"
-                style={{
-                  height: 1,
-                  background: active === ann.id ? "#e8578a" : "#e8e8e8",
-                  width: active === ann.id ? "100%" : "40%",
-                  marginLeft: "calc(9px + 0.5rem)",
-                }}
-              />
-            </motion.button>
-          ))}
-        </div>
-
-        {/* Laptop */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease, delay: 0.1 }}
+    <div className="px-[5.5vw]" style={{ paddingTop: 48, paddingBottom: 56 }}>
+      {/* Heading */}
+      <div className="mb-10" style={{ maxWidth: 560 }}>
+        <h3
+          className="font-bold text-[#111] mb-3"
+          style={{ fontFamily: "'Amulya', var(--font-display)", fontSize: "clamp(1.3rem, 2.5vw, 2rem)" }}
         >
-          <LaptopFrame>
-            <LumaEmbed height="100%" className="absolute inset-0" />
-          </LaptopFrame>
-
-          {/* Explore link below laptop */}
-          <div className="flex justify-end mt-4">
-            {LUMA_DEMO_URL ? (
-              <a
-                href={LUMA_DEMO_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-[11px] text-[#888] hover:text-[#111] transition-colors"
-                style={{ fontFamily: "var(--font-mono)", letterSpacing: "0.12em" }}
-              >
-                EXPLORE FULL SYSTEM ↗
-              </a>
-            ) : null}
-          </div>
-        </motion.div>
-
-        {/* Right annotations */}
-        <div className="flex flex-col gap-8 pt-[35%]">
-          {ANNOTATIONS.filter(a => a.side === "right").map((ann, i) => (
-            <motion.button
-              key={ann.id}
-              onClick={() => setActive(active === ann.id ? null : ann.id)}
-              className="text-left group"
-              initial={{ opacity: 0, x: 12 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 + i * 0.1, duration: 0.5, ease }}
-            >
-              <div className="flex items-start gap-2">
-                <span
-                  className="transition-colors duration-200 shrink-0 mt-0.5"
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: 9,
-                    color: active === ann.id ? "#e8578a" : "#bbb",
-                    letterSpacing: "0.1em",
-                  }}
-                >
-                  {ann.num}
-                </span>
-                <div>
-                  <p
-                    className="transition-colors duration-200 leading-none mb-1"
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: 9,
-                      letterSpacing: "0.12em",
-                      color: active === ann.id ? "#111" : "#888",
-                    }}
-                  >
-                    {ann.label}
-                  </p>
-                  <p
-                    className="transition-colors duration-200"
-                    style={{
-                      fontFamily: "var(--font-sans)",
-                      fontSize: 11,
-                      color: active === ann.id ? "#444" : "#bbb",
-                      lineHeight: 1.45,
-                    }}
-                  >
-                    {ann.question}
-                  </p>
-                </div>
-              </div>
-              <div
-                className="mt-2 transition-all duration-200"
-                style={{
-                  height: 1,
-                  background: active === ann.id ? "#e8578a" : "#e8e8e8",
-                  width: active === ann.id ? "100%" : "40%",
-                }}
-              />
-            </motion.button>
-          ))}
-        </div>
+          Explore the Financial Model
+        </h3>
+        <p className="text-[14px] text-[#888] font-light leading-relaxed">
+          Switch between monthly and weekly views, adjust the time period, hover over bars and
+          data points to see transaction-level breakdowns, and explore how inflows, outflows,
+          and cash balance connect.
+        </p>
       </div>
 
-      {/* Mobile: stack annotations below */}
-      <div className="md:hidden mt-6 grid grid-cols-1 gap-4">
-        {ANNOTATIONS.map(ann => (
-          <div key={ann.id} className="flex items-start gap-3 border-l-2 border-[#e8e8e8] pl-3">
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "#e8578a" }}>{ann.num}</span>
-            <div>
-              <p style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "#888", letterSpacing: "0.1em" }}>
-                {ann.label}
-              </p>
-              <p style={{ fontFamily: "var(--font-sans)", fontSize: 12, color: "#666" }}>{ann.question}</p>
+      {/* Desktop — laptop frame */}
+      <motion.div
+        className="hidden md:block"
+        style={{ maxWidth: "90%", margin: "0 auto" }}
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease }}
+      >
+        <LaptopFrame>
+          <LumaEmbed height="100%" className="absolute inset-0" />
+        </LaptopFrame>
+      </motion.div>
+
+      {/* Mobile — browser chrome frame with live embed */}
+      <div className="md:hidden">
+        <div className="border border-[#e8e8e8] rounded-lg overflow-hidden">
+          <div className="bg-[#f7f7f9] px-3 py-2 flex items-center gap-2 border-b border-[#e8e8e8]">
+            <div className="flex gap-1.5">
+              {[0,1,2].map(i => <div key={i} className="w-2 h-2 rounded-full bg-[#e0e0e0]" />)}
+            </div>
+            <div className="flex-1 bg-white rounded border border-[#e8e8e8] px-3 py-0.5 mx-2">
+              <p style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "#bbb" }}>luma-live.vercel.app</p>
             </div>
           </div>
-        ))}
+          <LumaEmbed height="480px" />
+        </div>
       </div>
     </div>
   );
@@ -522,7 +349,7 @@ function DrillRow({ node, depth = 0 }: { node: DrillNode; depth?: number }) {
             </div>
             <span
               className="shrink-0 font-bold text-[14px] text-[#111]"
-              style={{ fontFamily: "var(--font-display)" }}
+              style={{ fontFamily: "'Amulya', var(--font-display)" }}
             >
               {fmt(node.amount)}
             </span>
@@ -544,14 +371,14 @@ function DrillRow({ node, depth = 0 }: { node: DrillNode; depth?: number }) {
               </span>
               <span
                 className="text-[13px] text-[#111] font-medium group-hover:text-[#e8578a] transition-colors"
-                style={{ fontFamily: depth === 0 ? "var(--font-display)" : "var(--font-sans)", letterSpacing: depth <= 1 ? "0.04em" : 0 }}
+                style={{ fontFamily: depth === 0 ? "'Amulya', var(--font-display)" : "var(--font-sans)", letterSpacing: depth <= 1 ? "0.04em" : 0 }}
               >
                 {node.label}
               </span>
             </div>
             <span
               className="font-bold text-[13px] text-[#111]"
-              style={{ fontFamily: "var(--font-display)" }}
+              style={{ fontFamily: "'Amulya', var(--font-display)" }}
             >
               {fmt(node.amount)}
             </span>
@@ -639,7 +466,7 @@ function DataSources() {
         animate={inView ? { opacity: 1, scale: 1 } : {}}
         transition={{ delay: 0.7, duration: 0.4, ease }}
       >
-        <p className="font-bold" style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem", letterSpacing: "0.06em" }}>
+        <p className="font-bold" style={{ fontFamily: "'Amulya', var(--font-display)", fontSize: "1.1rem", letterSpacing: "0.06em" }}>
           LUMA LIVE
         </p>
         <p style={{ fontFamily: "var(--font-mono)", fontSize: 8, color: "#aaa", letterSpacing: "0.1em", marginTop: 3 }}>
@@ -698,7 +525,7 @@ function Chapter({ num, title, children }: { num: string; title: string; childre
         </p>
         <h2
           className="font-bold text-[#111] mb-10"
-          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.4rem, 3vw, 2.6rem)" }}
+          style={{ fontFamily: "'Amulya', var(--font-display)", fontSize: "clamp(1.4rem, 3vw, 2.6rem)" }}
         >
           {title}
         </h2>
@@ -720,7 +547,7 @@ export default function LumaCaseStudy() {
         <Link
           href="/"
           className="font-bold text-[#111] hover:text-[#e8578a] transition-colors"
-          style={{ fontFamily: "var(--font-display)", fontSize: "0.95rem" }}
+          style={{ fontFamily: "'Amulya', var(--font-display)", fontWeight: 600, fontSize: "1rem" }}
         >
           Yen Tran
         </Link>
@@ -729,7 +556,7 @@ export default function LumaCaseStudy() {
           className="text-[#aaa] hover:text-[#111] transition-colors"
           style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.16em" }}
         >
-          ← ALL WORK
+          ← All work
         </Link>
       </header>
 
@@ -741,10 +568,10 @@ export default function LumaCaseStudy() {
 
         <h1
           className="font-bold text-[#111] leading-none mb-8"
-          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem, 7vw, 7.5rem)" }}
+          style={{ fontFamily: "'Amulya', var(--font-display)", fontSize: "clamp(2.8rem, 7vw, 7.5rem)" }}
         >
-          WILL WE NEED
-          <br />MORE CASH?
+          Will we need
+          <br />more cash?
         </h1>
 
         <p className="text-[16px] text-[#666] font-light leading-relaxed mb-6" style={{ maxWidth: "52ch" }}>
@@ -770,7 +597,7 @@ export default function LumaCaseStudy() {
           </p>
           <h2
             className="font-bold text-[#111] mb-4"
-            style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.4rem, 3vw, 2.6rem)" }}
+            style={{ fontFamily: "'Amulya', var(--font-display)", fontSize: "clamp(1.4rem, 3vw, 2.6rem)" }}
           >
             THE DECISION
           </h2>
@@ -779,51 +606,7 @@ export default function LumaCaseStudy() {
           </p>
         </div>
 
-        {/* Mobile: browser-frame view */}
-        <div className="md:hidden px-[5.5vw] pb-10">
-          <div className="border border-[#e8e8e8] rounded-t-lg overflow-hidden">
-            <div className="bg-[#f7f7f9] px-3 py-2 flex items-center gap-2 border-b border-[#e8e8e8]">
-              <div className="flex gap-1.5">
-                {[0,1,2].map(i => <div key={i} className="w-2 h-2 rounded-full bg-[#e8e8e8]" />)}
-              </div>
-              <div className="flex-1 bg-white rounded border border-[#e8e8e8] px-3 py-0.5 mx-2">
-                <p style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "#bbb" }}>
-                  luma-live.vercel.app
-                </p>
-              </div>
-            </div>
-            <LumaEmbed height="400px" />
-          </div>
-          {LUMA_DEMO_URL && (
-            <a
-              href={LUMA_DEMO_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 flex items-center justify-center gap-2 border border-[#e8e8e8] py-3 text-[11px] text-[#888] hover:text-[#111] transition-colors"
-              style={{ fontFamily: "var(--font-mono)", letterSpacing: "0.12em" }}
-            >
-              OPEN FULL SYSTEM ↗
-            </a>
-          )}
-          <div className="mt-6 grid grid-cols-1 gap-3">
-            {ANNOTATIONS.map(ann => (
-              <div key={ann.id} className="flex items-start gap-3 border-l-2 border-[#e8e8e8] pl-3">
-                <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "#e8578a" }}>{ann.num}</span>
-                <div>
-                  <p style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "#888", letterSpacing: "0.1em" }}>
-                    {ann.label}
-                  </p>
-                  <p className="text-[12px] text-[#666]">{ann.question}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Desktop: laptop + annotations */}
-        <div className="hidden md:block bg-[#fafafa]">
-          <AnnotatedLaptop />
-        </div>
+        <LaptopShowcase />
 
         {/* VIEW ASSUMPTION */}
         <div className="px-[5.5vw] py-8">
@@ -867,7 +650,7 @@ export default function LumaCaseStudy() {
       </div>
 
       {/* Chapter 02 — THE ECONOMICS */}
-      <Chapter num="CHAPTER 02" title="ACCOUNTING PERIOD ≠ EVENT ECONOMICS">
+      <Chapter num="CHAPTER 02" title="Accounting period ≠ Event economics">
         <p className="text-[15px] text-[#666] font-light leading-relaxed mb-6" style={{ maxWidth: "52ch" }}>
           A transaction knows when it posted. Management needs to know what event it belongs to.
         </p>
@@ -883,7 +666,7 @@ export default function LumaCaseStudy() {
       </Chapter>
 
       {/* Chapter 03 — THE DRILL */}
-      <Chapter num="CHAPTER 03" title="ONE NUMBER. ALL THE WAY DOWN.">
+      <Chapter num="CHAPTER 03" title="One number. All the way down.">
         <p className="text-[15px] text-[#666] font-light leading-relaxed mb-10" style={{ maxWidth: "52ch" }}>
           Every management KPI can be traced into its underlying transactions. Click a line to expand.
         </p>
@@ -893,7 +676,7 @@ export default function LumaCaseStudy() {
       </Chapter>
 
       {/* Chapter 04 — THE SYSTEM */}
-      <Chapter num="CHAPTER 04" title="FOUR SOURCES. ONE MANAGEMENT VIEW.">
+      <Chapter num="CHAPTER 04" title="Four sources. One management view.">
         <p className="text-[15px] text-[#666] font-light leading-relaxed mb-12" style={{ maxWidth: "52ch" }}>
           The dashboard and management report derive from the same underlying model—accounting actuals, event economics, approved budgets, and forward cash commitments combined.
         </p>
@@ -907,25 +690,10 @@ export default function LumaCaseStudy() {
         </p>
         <h2
           className="font-bold text-[#111] mb-8"
-          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.8rem, 4vw, 4rem)" }}
+          style={{ fontFamily: "'Amulya', var(--font-display)", fontSize: "clamp(1.8rem, 4vw, 4rem)" }}
         >
           EXPLORE LUMA LIVE
         </h2>
-        {LUMA_DEMO_URL ? (
-          <a
-            href={LUMA_DEMO_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-3 border border-[#111] px-8 py-4 text-[#111] hover:bg-[#111] hover:text-white transition-all"
-            style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.16em" }}
-          >
-            OPEN FULL SYSTEM ↗
-          </a>
-        ) : (
-          <p style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#bbb" }}>
-            DEPLOYMENT COMING SOON
-          </p>
-        )}
       </section>
 
       {/* Footer nav */}
@@ -940,7 +708,7 @@ export default function LumaCaseStudy() {
         <Link
           href="/"
           className="font-bold text-[#111] hover:text-[#e8578a] transition-colors"
-          style={{ fontFamily: "var(--font-display)", fontSize: "0.9rem" }}
+          style={{ fontFamily: "'Amulya', var(--font-display)", fontWeight: 600, fontSize: "1rem" }}
         >
           Yen Tran
         </Link>
